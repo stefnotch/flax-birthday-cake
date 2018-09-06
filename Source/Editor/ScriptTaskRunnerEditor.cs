@@ -4,7 +4,7 @@ using FlaxEngine;
 
 namespace NinaBirthday
 {
-	[CustomEditor(typeof(MeshMerger))]
+	/*[CustomEditor(typeof(MeshMerger))]
 	public class ScriptTaskRunnerEditor : GenericEditor
 	{
 		public override void Initialize(LayoutElementsContainer layout)
@@ -18,5 +18,5 @@ namespace NinaBirthday
 			var button = layout.Button("Merge Meshes", Color.Green);
 			button.Button.Clicked += () => merger.Run();
 		}
-	}
+	}*/
 }
