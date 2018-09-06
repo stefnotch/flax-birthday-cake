@@ -1,7 +1,7 @@
 {
 	"ID": "4c42950443561645d7e376a46b4c0b00",
 	"TypeName": "FlaxEngine.Prefab",
-	"EngineBuild": 6166,
+	"EngineBuild": 6167,
 	"Data": [
 	{
 		"TypeID": 1,
@@ -10,18 +10,13 @@
 		"Name": "Sphere",
 		"Transform": {
 			"Scale": {
-				"X": 0.10000000149011612,
-				"Y": 0.10000000149011612,
-				"Z": 0.10000000149011612
+				"X": 0.003000000026077032,
+				"Y": 0.003000000026077032,
+				"Z": 0.003000000026077032
 			}
 		},
-		"Model": "dd86c4724bf734c4959d23b3c74faa05",
 		"Buffer": {
-			"Entries": [
-				{
-					"Material": "807f253a466855573d70978c305d4759"
-				}
-			]
+			"Entries": []
 		}
 	},
 	{
@@ -29,8 +24,14 @@
 		"ID": "e488018244f7597c0ca57e98b96b4d8d",
 		"ParentID": "e170bf394ca2a6433bbf8d8404943aa1",
 		"V": {
-	"Distance": 3.0
+	"Distance": 0.1
 }
+	},
+	{
+		"TypeID": "NinaBirthday.ImplicitSurface.ImplicitObject",
+		"ID": "9c02c46b451281ec70ef9d820ecbc5c7",
+		"ParentID": "e170bf394ca2a6433bbf8d8404943aa1",
+		"V": {}
 	}
 ]
 }

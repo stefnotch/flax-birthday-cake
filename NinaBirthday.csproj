@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="Source\CakeCamera.cs" />
     <Compile Include="Source\CircleSpawner.cs" />
-    <Compile Include="Source\MeshMerger.cs" />
     <Compile Include="Source\OctTreeCell.cs" />
     <Compile Include="Source\ScriptT.cs" />
     <Compile Include="Source\SpawnMover.cs" />

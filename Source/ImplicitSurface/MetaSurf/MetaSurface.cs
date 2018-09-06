@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,15 +45,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		public MetaSurface()
 		{
 			Threshold = 0f;
-
-			_boundingBox = new BoundingBox(new Vector3(-1), new Vector3(1));
 			Resolution = new Vector3(40);
 
 			_dx = _dy = _dz = 0.001f;
 			Flip = FlipType.Greater;
 		}
-
-		private BoundingBox _boundingBox;
 
 		public Vector3 Resolution;
 		public float Threshold;
@@ -72,19 +68,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 		public float Evaluate(float x, float y, float z, bool onlyComputeNormal = false)
 		{
-			Vector3 position = new Vector3(x, y, z);
 			float value = 0;
-
-			var affectedShapes = ImplicitShapes
-				.Where(shape => shape.BoundingBox.Contains(ref position) != ContainmentType.Disjoint);
+			Vector3 position = new Vector3(x, y, z);
 			if (onlyComputeNormal)
 			{
-				affectedShapes = affectedShapes.Where(shape => shape.ShouldComputeNormal);
+				foreach (var shape in ImplicitShapes)
+				{
+					//if (shape.BoundingBox.Contains(ref position) != ContainmentType.Disjoint && shape.ShouldComputeNormal)
+					{
+						value += shape.Evaluate(this, x, y, z);
+					}
+				}
 			}
-
-			foreach (var shape in affectedShapes)
+			else
 			{
-				value += shape.Evaluate(this, x, y, z);
+				foreach (var shape in ImplicitShapes)
+				{
+					//if (shape.BoundingBox.Contains(ref position) != ContainmentType.Disjoint)
+					{
+						value += shape.Evaluate(this, x, y, z);
+					}
+				}
 			}
 
 			return value;
@@ -94,20 +98,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		{
 			Reset();
 
-
-			_boundingBox = BoundingBox.Empty;
-
 			foreach (var implicitShape in this.ImplicitShapes)
 			{
-				_boundingBox = BoundingBox.Merge(_boundingBox, implicitShape.BoundingBox);
+				PolygonizeShape(implicitShape);
 			}
+		}
 
+		private void PolygonizeShape(IImplicitShape shape)
+		{
 			Vector3 cellPos = Vector3.Zero;
-			Vector3 delta = _boundingBox.Size / Resolution;
+			Vector3 delta = shape.BoundingBox.Size / Resolution;
 
-			float minX = _boundingBox.Minimum.X;
-			float minY = _boundingBox.Minimum.Y;
-			float minZ = _boundingBox.Minimum.Z;
+			float minX = shape.BoundingBox.Minimum.X;
+			float minY = shape.BoundingBox.Minimum.Y;
+			float minZ = shape.BoundingBox.Minimum.Z;
 
 			cellPos[0] = minX;
 			for (int i = 0; i < Resolution[0] - 1; i++)
@@ -118,7 +122,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 					cellPos[2] = minZ;
 					for (int k = 0; k < Resolution[2] - 1; k++)
 					{
-						process_cell(cellPos, delta);
+						process_cell(ref cellPos, ref delta);
 						cellPos[2] += delta[2];
 					}
 					cellPos[1] += delta[1];
@@ -128,7 +132,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		}
 
 
-		private void process_cell(Vector3 pos, Vector3 sz)
+		private void process_cell(ref Vector3 pos, ref Vector3 sz)
 		{
 			Vector3[] p = new Vector3[8];
 			float[] val = new float[8];
@@ -226,6 +230,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 							normalVector = -normalVector;
 						}
 						_normals.Add(normalVector);
+					}
+					else
+					{
+						_normals.Add(Vector3.Forward);
 					}
 					// TODO multithreadied polygon emmit 
 					_vertices.Add(v);

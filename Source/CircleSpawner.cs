@@ -1,6 +1,6 @@
-﻿using FlaxEngine;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FlaxEngine;
 
 namespace NinaBirthday
 {
@@ -8,6 +8,7 @@ namespace NinaBirthday
 	public class CircleSpawner : Script
 	{
 		public Prefab PrefabToSpawn { get; set; }
+		public Actor Container;
 
 		[Range(0, 1000)]
 		public float Radius
@@ -26,8 +27,6 @@ namespace NinaBirthday
 		private float _radius;
 		private int _count;
 
-		[Serialize]
-		private Actor _container;
 
 		private void OnEnable()
 		{
@@ -39,20 +38,20 @@ namespace NinaBirthday
 		{
 			if (PrefabToSpawn == null) return;
 
-			if (_container == null)
+			if (Container == null)
 			{
-				_container = New<EmptyActor>();
-				this.Actor.AddChild(_container, false);
+				Container = New<EmptyActor>();
+				this.Actor.AddChild(Container, false);
 			}
 			else
 			{
-				_container.DestroyChildren();
+				Container.DestroyChildren();
 			}
 
 			float angle = 0;
 			for (int i = 0; i < Count; i++)
 			{
-				var spawnedActor = PrefabManager.SpawnPrefab(PrefabToSpawn, _container);
+				var spawnedActor = PrefabManager.SpawnPrefab(PrefabToSpawn, Container);
 				spawnedActor.LocalPosition += Vector3.Forward * Quaternion.RotationY(angle) * Radius;
 				//spawnedActor.LookAt(this.Actor);
 				angle += Mathf.TwoPi / Count;
@@ -61,7 +60,7 @@ namespace NinaBirthday
 
 		private void OnDisable()
 		{
-			Destroy(_container);
+			Destroy(Container);
 		}
 	}
 }

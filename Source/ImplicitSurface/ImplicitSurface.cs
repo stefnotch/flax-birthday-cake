@@ -11,6 +11,8 @@ namespace NinaBirthday.ImplicitSurface
 	[ExecuteInEditMode]
 	public class ImplicitSurface : ScriptT<ModelActor>
 	{
+		[ShowInEditor]
+		[NoSerialize]
 		private MetaSurface MetaSurface = new MetaSurface()
 		{
 			Threshold = 12
@@ -21,7 +23,7 @@ namespace NinaBirthday.ImplicitSurface
 		private bool ShouldUpdateMesh;
 		private float _previousTime;
 
-		public float MeshUpdateTime { get; set; } = 1f;
+		public float MeshUpdateTime { get; set; } = 0.1f;
 
 		private void Start()
 		{
@@ -38,7 +40,6 @@ namespace NinaBirthday.ImplicitSurface
 			if (_mesh != null && ShouldUpdateMesh && Time.GameTime - _previousTime > MeshUpdateTime)
 			{
 				ShouldUpdateMesh = false;
-				_previousTime = Time.GameTime;
 
 				MetaSurface.Polygonize();
 				var vertices = MetaSurface.Vertices;
@@ -46,7 +47,13 @@ namespace NinaBirthday.ImplicitSurface
 				{
 					_mesh.UpdateMesh(vertices, MetaSurface.Indices, MetaSurface.Normals);
 				}
+				_previousTime = Time.GameTime;
 			}
+		}
+
+		public void RemoveShape(MetaBall metaBall)
+		{
+			MetaSurface.ImplicitShapes.Remove(metaBall);
 		}
 
 		public void AddShape(IImplicitShape shape)

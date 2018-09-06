@@ -20,6 +20,7 @@ namespace NinaBirthday.MetaSurf
 
 		public bool ShouldComputeNormal { get; set; } = true;
 
+		[HideInEditor]
 		public BoundingBox BoundingBox { get; set; }
 
 		public float Energy
