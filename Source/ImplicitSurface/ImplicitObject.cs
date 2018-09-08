@@ -20,22 +20,21 @@ namespace NinaBirthday.ImplicitSurface
 
 		private void OnEnable()
 		{
-			if (Actor.Parent != null)
+			if (Actor.Parent)
 			{
 				_surface = Actor.Parent.GetScript<ImplicitSurface>();
 			}
 
-			if (_surface != null)
+			if (_surface)
 			{
-				_metaBall = new MetaBall(Actor.LocalPosition, 0.25f);
+				_metaBall = new MetaBall(Actor.LocalPosition, 10f);
 				_surface.AddShape(_metaBall);
-				_surface.UpdateMesh();
 			}
 		}
 
 		private void Update()
 		{
-			if (Actor.Position != _position && _surface != null)
+			if (Actor.Position != _position && _surface)
 			{
 				_position = Actor.Position;
 				_metaBall.Position = Actor.LocalPosition;
@@ -45,7 +44,7 @@ namespace NinaBirthday.ImplicitSurface
 
 		private void OnDisable()
 		{
-			if (_surface != null)
+			if (_surface)
 			{
 				_surface.RemoveShape(_metaBall);
 			}

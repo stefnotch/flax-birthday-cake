@@ -7,7 +7,7 @@ using FlaxEngine;
 
 namespace NinaBirthday.MetaSurf
 {
-	public class MetaBall : IImplicitShape
+	public class MetaBall : ImplicitShape
 	{
 		private float _energy;
 		private Vector3 _position;
@@ -16,12 +16,9 @@ namespace NinaBirthday.MetaSurf
 			_position = position;
 			_energy = energy;
 			ComputeBoundingBox();
+
+			ShouldComputeNormal = true;
 		}
-
-		public bool ShouldComputeNormal { get; set; } = true;
-
-		[HideInEditor]
-		public BoundingBox BoundingBox { get; set; }
 
 		public float Energy
 		{
@@ -42,7 +39,7 @@ namespace NinaBirthday.MetaSurf
 			this.BoundingBox = new BoundingBox(_position - size, _position + size);
 		}
 
-		public float Evaluate(MetaSurface ms, float x, float y, float z)
+		public override float Evaluate(float x, float y, float z)
 		{
 			float val = 0.0f;
 

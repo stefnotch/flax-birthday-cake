@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		private readonly List<Vector3> _normals = new List<Vector3>();
 		private int _indexCounter;
 
-		public readonly List<IImplicitShape> ImplicitShapes = new List<IImplicitShape>();
+		public readonly List<ImplicitShape> ImplicitShapes = new List<ImplicitShape>();
 
 		public enum FlipType
 		{
@@ -76,7 +76,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 				{
 					//if (shape.BoundingBox.Contains(ref position) != ContainmentType.Disjoint && shape.ShouldComputeNormal)
 					{
-						value += shape.Evaluate(this, x, y, z);
+						value += shape.Evaluate(x, y, z);
 					}
 				}
 			}
@@ -86,7 +86,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 				{
 					//if (shape.BoundingBox.Contains(ref position) != ContainmentType.Disjoint)
 					{
-						value += shape.Evaluate(this, x, y, z);
+						value += shape.Evaluate(x, y, z);
 					}
 				}
 			}
@@ -104,7 +104,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			}
 		}
 
-		private void PolygonizeShape(IImplicitShape shape)
+		private void PolygonizeShape(ImplicitShape shape)
 		{
 			Vector3 cellPos = Vector3.Zero;
 			Vector3 delta = shape.BoundingBox.Size / Resolution;

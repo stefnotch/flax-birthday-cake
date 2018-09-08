@@ -11,12 +11,19 @@ namespace NinaBirthday.ImplicitSurface
 	[ExecuteInEditMode]
 	public class ImplicitSurface : ScriptT<ModelActor>
 	{
-		[ShowInEditor]
+		public MaterialBase Material { get; set; }
+		/*[ShowInEditor]
 		[NoSerialize]
 		private MetaSurface MetaSurface = new MetaSurface()
 		{
 			Threshold = 12
-		};
+		};*/
+
+		[ShowInEditor]
+		[NoSerialize]
+		private MetaSurface1 MetaSurface = new MetaSurface1();
+
+		private readonly List<ImplicitShape> ImplicitShapes = new List<ImplicitShape>();
 
 		private Mesh _mesh;
 
@@ -29,10 +36,19 @@ namespace NinaBirthday.ImplicitSurface
 		{
 			//MetaSurface.ImplicitShapes.Clear();
 
+
 			var model = Content.CreateVirtualAsset<Model>();
 			model.SetupLODs(1);
-			this.Actor.Model = model;
+			if (Material)
+			{
+				model.SetupMaterialSlots(1);
+			}
+			Actor.Model = model;
 			_mesh = model.LODs[0].Meshes[0];
+			if (Material)
+			{
+				Actor.Entries[0].Material = Material;
+			}
 		}
 
 		private void Update()
@@ -40,25 +56,27 @@ namespace NinaBirthday.ImplicitSurface
 			if (_mesh != null && ShouldUpdateMesh && Time.GameTime - _previousTime > MeshUpdateTime)
 			{
 				ShouldUpdateMesh = false;
-
-				MetaSurface.Polygonize();
+				Debug.Log("Up");
+				MetaSurface.Polygonize(ImplicitShapes);
 				var vertices = MetaSurface.Vertices;
+				var triangles = MetaSurface.Indices;
+				var normals = MetaSurface.Normals;
 				if (vertices.Length > 0)
 				{
-					_mesh.UpdateMesh(vertices, MetaSurface.Indices, MetaSurface.Normals);
+					_mesh.UpdateMesh(vertices, triangles, normals);
 				}
 				_previousTime = Time.GameTime;
 			}
 		}
 
-		public void RemoveShape(MetaBall metaBall)
+		public void RemoveShape(ImplicitShape shape)
 		{
-			MetaSurface.ImplicitShapes.Remove(metaBall);
+			ImplicitShapes.Remove(shape);
 		}
 
-		public void AddShape(IImplicitShape shape)
+		public void AddShape(ImplicitShape shape)
 		{
-			MetaSurface.ImplicitShapes.Add(shape);
+			ImplicitShapes.Add(shape);
 		}
 
 		public void UpdateMesh()

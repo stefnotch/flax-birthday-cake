@@ -166,17 +166,12 @@
 			"ID": "fdb5d9404134d19c06a8da9439da149f",
 			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
 			"Name": "ImplicitCherries",
-			"Transform": {
-				"Scale": {
-					"X": 30.0,
-					"Y": 30.0,
-					"Z": 30.0
-				}
-			},
-			"Model": "77c8da5e4e4fc24a39a72086f7b857fb",
+			"Model": "7f05eff44d9549660da5f0b23e49b039",
 			"Buffer": {
 				"Entries": [
-					{}
+					{
+						"Material": "5e05cef14b8020a6f0ef4d87631ed017"
+					}
 				]
 			}
 		},
@@ -185,37 +180,31 @@
 			"ID": "029a2acb44b778b9e76fd88628b0957e",
 			"ParentID": "fdb5d9404134d19c06a8da9439da149f",
 			"V": {
+	"Material": "5e05cef14b8020a6f0ef4d87631ed017",
 	"MeshUpdateTime": 1.0
 }
 		},
 		{
-			"ID": "fd56a0eb4fab73a57ac9e4b838f5bb7b",
+			"ID": "940f9fb64dcfa807ddbf42972db2d64d",
 			"PrefabID": "4c42950443561645d7e376a46b4c0b00",
 			"PrefabObjectID": "e170bf394ca2a6433bbf8d8404943aa1",
 			"ParentID": "fdb5d9404134d19c06a8da9439da149f",
-			"Transform": {
-				"Translation": {
-					"X": 0.029448816552758218,
-					"Y": 0.09133527427911759,
-					"Z": 1.0350192785263062
-				}
-			},
 			"Buffer": {
 				"Entries": []
 			}
 		},
 		{
-			"ID": "1a17da2746efea4380554bac73d09ee9",
+			"ID": "acc933dd4a422f86dcb408be96430132",
 			"PrefabID": "4c42950443561645d7e376a46b4c0b00",
 			"PrefabObjectID": "e488018244f7597c0ca57e98b96b4d8d",
-			"ParentID": "fd56a0eb4fab73a57ac9e4b838f5bb7b",
+			"ParentID": "940f9fb64dcfa807ddbf42972db2d64d",
 			"V": {}
 		},
 		{
-			"ID": "be10e26c4754d651cd5368beda2de5b5",
+			"ID": "a11f07b04ffb2d086b552f922a761421",
 			"PrefabID": "4c42950443561645d7e376a46b4c0b00",
 			"PrefabObjectID": "9c02c46b451281ec70ef9d820ecbc5c7",
-			"ParentID": "fd56a0eb4fab73a57ac9e4b838f5bb7b",
+			"ParentID": "940f9fb64dcfa807ddbf42972db2d64d",
 			"V": {}
 		}
 	]
