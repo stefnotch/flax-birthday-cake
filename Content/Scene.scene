@@ -125,7 +125,7 @@
 					"Z": -151.1709747314453
 				}
 			},
-			"Model": "3148a74844f349a978a44480dadc0623",
+			"Model": "10cf2ca24242a83a36aba3ac707cab84",
 			"Buffer": {
 				"Entries": [
 					{
@@ -140,6 +140,7 @@
 			"ParentID": "fdb5d9404134d19c06a8da9439da149f",
 			"V": {
 	"Material": "5e05cef14b8020a6f0ef4d87631ed017",
+	"Expression": "Pow(Sqrt(x * x + z * z) - 9, 2) + 1 * Pow(y + Sin(7 * Atan2(z, x)), 2) - 5",
 	"MeshUpdateTime": 1.0
 }
 		},

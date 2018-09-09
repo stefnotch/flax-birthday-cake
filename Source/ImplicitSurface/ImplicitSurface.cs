@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlaxEngine;
+using NinaBirthday.FunctionCompiler;
 using NinaBirthday.MetaSurf;
 
 namespace NinaBirthday.ImplicitSurface
@@ -12,12 +13,17 @@ namespace NinaBirthday.ImplicitSurface
 	public class ImplicitSurface : ScriptT<ModelActor>
 	{
 		public MaterialBase Material { get; set; }
-		/*[ShowInEditor]
-		[NoSerialize]
-		private MetaSurface MetaSurface = new MetaSurface()
+
+
+		public string Expression
 		{
-			Threshold = 12
-		};*/
+			get => _expressionString;
+			set
+			{
+				_expressionString = value;
+				RecompileExpression(_expressionString);
+			}
+		}
 
 		[ShowInEditor]
 		[NoSerialize]
@@ -27,13 +33,19 @@ namespace NinaBirthday.ImplicitSurface
 
 		private Mesh _mesh;
 
+		private RuntimeASTCompiler _runtimeASTCompiler = new RuntimeASTCompiler();
+
 		private bool ShouldUpdateMesh = true;
 		private float _previousTime;
+		private string _expressionString;
 
 		public float MeshUpdateTime { get; set; } = 0.1f;
 
 		private void Start()
 		{
+			var comp = new RuntimeASTCompiler();
+			comp.CompileFunction("3");
+
 			System.Linq.Expressions.Expression<Func<float, float, float, float>> ex = (x, y, z) =>
 				Mathf.Pow(Mathf.Sqrt(x * x + z * z) - 9, 2) + 1 * Mathf.Pow(y + Mathf.Sin(7f * Mathf.Atan2(z, x)), 2) - 5f;
 
@@ -67,6 +79,7 @@ namespace NinaBirthday.ImplicitSurface
 				var normals = MetaSurface.Normals;
 				if (vertices.Length > 0)
 				{
+					Debug.Log("Actual Update");
 					_mesh.UpdateMesh(vertices, triangles, normals);
 				}
 				_previousTime = Time.GameTime;
@@ -86,6 +99,25 @@ namespace NinaBirthday.ImplicitSurface
 		public void UpdateMesh()
 		{
 			ShouldUpdateMesh = true;
+		}
+
+		private void RecompileExpression(string expression)
+		{
+			Func<float, float, float, float> compiledExpression = null;
+			try
+			{
+				compiledExpression = _runtimeASTCompiler.CompileFunction(expression);
+			}
+			catch (Exception e)
+			{
+				Debug.Log(e);
+				throw;
+			}
+			if (compiledExpression != null)
+			{
+				MetaSurface.Evaluate = compiledExpression;
+				UpdateMesh();
+			}
 		}
 	}
 }
