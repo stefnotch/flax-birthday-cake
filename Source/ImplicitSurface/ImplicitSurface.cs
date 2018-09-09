@@ -21,21 +21,25 @@ namespace NinaBirthday.ImplicitSurface
 
 		[ShowInEditor]
 		[NoSerialize]
-		private MetaSurface1 MetaSurface = new MetaSurface1();
+		private MetaSurface MetaSurface = new MetaSurface();
 
 		private readonly List<ImplicitShape> ImplicitShapes = new List<ImplicitShape>();
 
 		private Mesh _mesh;
 
-		private bool ShouldUpdateMesh;
+		private bool ShouldUpdateMesh = true;
 		private float _previousTime;
 
 		public float MeshUpdateTime { get; set; } = 0.1f;
 
 		private void Start()
 		{
-			//MetaSurface.ImplicitShapes.Clear();
+			System.Linq.Expressions.Expression<Func<float, float, float, float>> ex = (x, y, z) =>
+				Mathf.Pow(Mathf.Sqrt(x * x + z * z) - 9, 2) + 1 * Mathf.Pow(y + Mathf.Sin(7f * Mathf.Atan2(z, x)), 2) - 5f;
 
+			var compiled = ex.Compile();
+			//MetaSurface.ImplicitShapes.Clear();
+			MetaSurface.Evaluate = compiled;
 
 			var model = Content.CreateVirtualAsset<Model>();
 			model.SetupLODs(1);
@@ -57,7 +61,7 @@ namespace NinaBirthday.ImplicitSurface
 			{
 				ShouldUpdateMesh = false;
 				Debug.Log("Up");
-				MetaSurface.Polygonize(ImplicitShapes);
+				MetaSurface.Polygonize(new BoundingBox(new Vector3(-6), new Vector3(6)));
 				var vertices = MetaSurface.Vertices;
 				var triangles = MetaSurface.Indices;
 				var normals = MetaSurface.Normals;

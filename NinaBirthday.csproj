@@ -57,13 +57,12 @@
     <Compile Include="Source\MetaSurfaceOctTree.cs" />
     <Compile Include="Source\ScriptT.cs" />
     <Compile Include="Source\SpawnMover.cs" />
+    <Compile Include="Source\FunctionCompiler\RuntimeCSharpCompiler.cs" />
     <Compile Include="Source\ImplicitSurface\ImplicitObject.cs" />
     <Compile Include="Source\ImplicitSurface\ImplicitSurface.cs" />
     <Compile Include="Source\ImplicitSurface\MetaSurf\ImplicitShape.cs" />
     <Compile Include="Source\ImplicitSurface\MetaSurf\MCubes.cs" />
-    <Compile Include="Source\ImplicitSurface\MetaSurf\MetaBall.cs" />
     <Compile Include="Source\ImplicitSurface\MetaSurf\MetaSurface.cs" />
-    <Compile Include="Source\ImplicitSurface\MetaSurf\MetaSurface1.cs" />
     <Compile Include="Source\ImplicitSurface\MetaSurf\OctTreeCell.cs" />
     <Compile Include="Cache\AssemblyInfo.cs" />
   </ItemGroup>

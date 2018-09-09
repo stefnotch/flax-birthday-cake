@@ -11,12 +11,12 @@ namespace NinaBirthday.ImplicitSurface
 	[ExecuteInEditMode]
 	public class ImplicitObject : Script
 	{
-		private ImplicitSurface _surface;
+		/*private ImplicitSurface _surface;
 		private Vector3 _position;
 
 		[ShowInEditor]
 		[NoSerialize]
-		private MetaBall _metaBall;
+		private ImplicitShape _implicitObject;
 
 		private void OnEnable()
 		{
@@ -27,8 +27,8 @@ namespace NinaBirthday.ImplicitSurface
 
 			if (_surface)
 			{
-				_metaBall = new MetaBall(Actor.LocalPosition, 10f);
-				_surface.AddShape(_metaBall);
+				_implicitObject = new MetaBall(Actor.LocalPosition, 10f);
+				_surface.AddShape(_implicitObject);
 			}
 		}
 
@@ -37,7 +37,7 @@ namespace NinaBirthday.ImplicitSurface
 			if (Actor.Position != _position && _surface)
 			{
 				_position = Actor.Position;
-				_metaBall.Position = Actor.LocalPosition;
+				_implicitObject.Position = Actor.LocalPosition;
 				_surface.UpdateMesh();
 			}
 		}
@@ -46,8 +46,8 @@ namespace NinaBirthday.ImplicitSurface
 		{
 			if (_surface)
 			{
-				_surface.RemoveShape(_metaBall);
+				_surface.RemoveShape(_implicitObject);
 			}
-		}
+		}*/
 	}
 }

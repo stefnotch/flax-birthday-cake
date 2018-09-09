@@ -114,59 +114,18 @@
 			"Name": "Cake"
 		},
 		{
-			"TypeID": "NinaBirthday.CircleSpawner",
-			"ID": "bbf364bc428af7f8fe718fbdde9524f0",
-			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
-			"V": {
-	"Container": "fdb5d9404134d19c06a8da9439da149f",
-	"PrefabToSpawn": "4c42950443561645d7e376a46b4c0b00",
-	"Radius": 1.0,
-	"Count": 1
-}
-		},
-		{
-			"TypeID": 2,
-			"ID": "b0d72c3746caebca055e1f921ca21c7c",
-			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
-			"Name": "Camera",
-			"Transform": {
-				"Translation": {
-					"X": -9.165190696716309,
-					"Y": 68.88692474365235,
-					"Z": 80.31642150878906
-				},
-				"Orientation": {
-					"X": 0.022202538326382638,
-					"Y": 0.96332848072052,
-					"Z": -0.08428029716014862,
-					"W": 0.2537761628627777
-				}
-			},
-			"StaticFlags": 0,
-			"CustomAspectRatio": 2.087930917739868,
-			"Near": 0.10000000149011612
-		},
-		{
-			"TypeID": "NinaBirthday.CakeCamera",
-			"ID": "8b2cf7a94a6c59ccf20ceda428ab9b4d",
-			"ParentID": "b0d72c3746caebca055e1f921ca21c7c",
-			"V": {
-	"Min": 10.0,
-	"Max": 120.0,
-	"Speed": {
-		"X": 10.0,
-		"Y": 10.0
-	},
-	"Damping": 0.01,
-	"Camera": "b0d72c3746caebca055e1f921ca21c7c"
-}
-		},
-		{
 			"TypeID": 1,
 			"ID": "fdb5d9404134d19c06a8da9439da149f",
 			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
 			"Name": "ImplicitCherries",
-			"Model": "7f05eff44d9549660da5f0b23e49b039",
+			"Transform": {
+				"Translation": {
+					"X": 0.0,
+					"Y": 0.0,
+					"Z": -151.1709747314453
+				}
+			},
+			"Model": "3148a74844f349a978a44480dadc0623",
 			"Buffer": {
 				"Entries": [
 					{
@@ -185,27 +144,121 @@
 }
 		},
 		{
-			"ID": "940f9fb64dcfa807ddbf42972db2d64d",
-			"PrefabID": "4c42950443561645d7e376a46b4c0b00",
-			"PrefabObjectID": "e170bf394ca2a6433bbf8d8404943aa1",
-			"ParentID": "fdb5d9404134d19c06a8da9439da149f",
+			"TypeID": 1,
+			"ID": "7ae4173a4b1ad0f8585e56a80b26635d",
+			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
+			"Name": "Level2",
+			"Transform": {
+				"Translation": {
+					"X": 0.0,
+					"Y": 75.0,
+					"Z": 0.0
+				},
+				"Scale": {
+					"X": 1.0,
+					"Y": 0.5,
+					"Z": 1.0
+				}
+			},
+			"Model": "223aa9894e90973780ab508621517526",
 			"Buffer": {
-				"Entries": []
+				"Entries": [
+					{}
+				]
 			}
 		},
 		{
-			"ID": "acc933dd4a422f86dcb408be96430132",
-			"PrefabID": "4c42950443561645d7e376a46b4c0b00",
-			"PrefabObjectID": "e488018244f7597c0ca57e98b96b4d8d",
-			"ParentID": "940f9fb64dcfa807ddbf42972db2d64d",
-			"V": {}
+			"TypeID": 1,
+			"ID": "751ec3114b140cf6f2a5e1825156e396",
+			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
+			"Name": "Level1",
+			"Transform": {
+				"Translation": {
+					"X": 0.0,
+					"Y": 35.0,
+					"Z": 0.0
+				},
+				"Scale": {
+					"X": 1.7999999523162842,
+					"Y": 0.5,
+					"Z": 1.7999999523162842
+				}
+			},
+			"Model": "223aa9894e90973780ab508621517526",
+			"Buffer": {
+				"Entries": [
+					{}
+				]
+			}
 		},
 		{
-			"ID": "a11f07b04ffb2d086b552f922a761421",
-			"PrefabID": "4c42950443561645d7e376a46b4c0b00",
-			"PrefabObjectID": "9c02c46b451281ec70ef9d820ecbc5c7",
-			"ParentID": "940f9fb64dcfa807ddbf42972db2d64d",
-			"V": {}
+			"TypeID": 1,
+			"ID": "a266778842f06901ae31359668d9bdd5",
+			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
+			"Name": "Level0",
+			"Transform": {
+				"Scale": {
+					"X": 2.5,
+					"Y": 0.4000000059604645,
+					"Z": 2.5
+				}
+			},
+			"Model": "223aa9894e90973780ab508621517526",
+			"Buffer": {
+				"Entries": [
+					{}
+				]
+			}
+		},
+		{
+			"TypeID": 3,
+			"ID": "ee42ba0e44417f92f9ebb7b57ad11c3f",
+			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
+			"Name": "CameraContainer",
+			"Transform": {
+				"Translation": {
+					"X": 0.0,
+					"Y": 20.0,
+					"Z": 0.0
+				}
+			}
+		},
+		{
+			"TypeID": 2,
+			"ID": "b0d72c3746caebca055e1f921ca21c7c",
+			"ParentID": "ee42ba0e44417f92f9ebb7b57ad11c3f",
+			"Name": "Camera",
+			"Transform": {
+				"Translation": {
+					"X": -11.227904319763184,
+					"Y": 68.88692474365235,
+					"Z": 206.46900939941407
+				},
+				"Orientation": {
+					"X": 0.022202536463737489,
+					"Y": 0.9633283615112305,
+					"Z": -0.08428028970956803,
+					"W": 0.2537761330604553
+				}
+			},
+			"StaticFlags": 0,
+			"CustomAspectRatio": 2.087930917739868,
+			"Near": 0.10000000149011612
+		},
+		{
+			"TypeID": "NinaBirthday.CakeCamera",
+			"ID": "8b2cf7a94a6c59ccf20ceda428ab9b4d",
+			"ParentID": "b0d72c3746caebca055e1f921ca21c7c",
+			"V": {
+	"Min": 10.0,
+	"Max": 100.0,
+	"Speed": {
+		"X": 10.0,
+		"Y": 10.0
+	},
+	"Damping": 0.01,
+	"Camera": "b0d72c3746caebca055e1f921ca21c7c"
+}
 		}
 	]
 }
