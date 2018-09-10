@@ -25,6 +25,8 @@ namespace NinaBirthday.FunctionCompiler
 
 				.AddBracket(@"\(", @"\)")
 
+				.AddUnaryOperator("min", @"[mM]in", 6, true)
+				.AddUnaryOperator("max", @"[mM]ax", 6, true)
 				.AddUnaryOperator("pow", @"[pP]ow", 6, true)
 				.AddUnaryOperator("atan", @"[aA]tan2?", 6, true)
 				.AddUnaryOperator("sqrt", @"[sS]qrt", 6, true)
@@ -144,6 +146,14 @@ namespace NinaBirthday.FunctionCompiler
 			case "atan":
 			{
 				return Expression.Call(typeof(Mathf).GetMethod("Atan2"), ASTNodeToExpression(node.Children[0].Children[0]), ASTNodeToExpression(node.Children[0].Children[1]));
+			}
+			case "min":
+			{
+				return Expression.Call(typeof(Mathf).GetMethod("Min", new[] { typeof(float), typeof(float) }), ASTNodeToExpression(node.Children[0].Children[0]), ASTNodeToExpression(node.Children[0].Children[1]));
+			}
+			case "max":
+			{
+				return Expression.Call(typeof(Mathf).GetMethod("Max", new[] { typeof(float), typeof(float) }), ASTNodeToExpression(node.Children[0].Children[0]), ASTNodeToExpression(node.Children[0].Children[1]));
 			}
 			default:
 			{

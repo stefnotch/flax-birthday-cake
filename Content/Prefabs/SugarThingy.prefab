@@ -1,0 +1,43 @@
+{
+	"ID": "9354aba74d1be48dd195b087f67dcde2",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6167,
+	"Data": [
+	{
+		"TypeID": 3,
+		"ID": "7909395b4abeaeed71bd829ca731a9e6",
+		"ParentID": "00000000000000000000000000000000",
+		"Name": "Root",
+		"Transform": {
+			"Scale": {
+				"X": 0.009999999776482582,
+				"Y": 0.10000000149011612,
+				"Z": 0.009999999776482582
+			}
+		}
+	},
+	{
+		"TypeID": 1,
+		"ID": "f81c9669460998d65bb3eaba6b6792c1",
+		"ParentID": "7909395b4abeaeed71bd829ca731a9e6",
+		"Name": "Cylinder",
+		"Model": "223aa9894e90973780ab508621517526",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "5620926c4a3c923239cbdf89411c4b5e"
+				}
+			]
+		}
+	},
+	{
+		"TypeID": "NinaBirthday.SugarThingy.RandomColor",
+		"ID": "2d11967b42c491a7712557b3aad56b1c",
+		"ParentID": "f81c9669460998d65bb3eaba6b6792c1",
+		"V": {
+	"Material": "5620926c4a3c923239cbdf89411c4b5e",
+	"ParamName": "Color"
+}
+	}
+]
+}

@@ -14,7 +14,6 @@ namespace NinaBirthday.ImplicitSurface
 	{
 		public MaterialBase Material { get; set; }
 
-
 		public string Expression
 		{
 			get => _expressionString;
@@ -25,33 +24,54 @@ namespace NinaBirthday.ImplicitSurface
 			}
 		}
 
+		[NoSerialize]
+		public Vector3 BoundingBoxSize
+		{
+			get => _boundingBoxSize;
+			set
+			{
+				_boundingBoxSize = value;
+				UpdateMesh();
+			}
+		}
+
+		[HideInEditor]
+		[NoSerialize]
+		public BoundingBox BoundingBox
+		{
+			get => new BoundingBox(-BoundingBoxSize, BoundingBoxSize);
+		}
+
 		[ShowInEditor]
 		[NoSerialize]
 		private MetaSurface MetaSurface = new MetaSurface();
 
-		private readonly List<ImplicitShape> ImplicitShapes = new List<ImplicitShape>();
-
 		private Mesh _mesh;
 
-		private RuntimeASTCompiler _runtimeASTCompiler = new RuntimeASTCompiler();
+		private RuntimeASTCompiler _runtimeASTCompiler;
 
 		private bool ShouldUpdateMesh = true;
 		private float _previousTime;
 		private string _expressionString;
 
+		[Serialize]
+		private Vector3 _boundingBoxSize = Vector3.One;
+
 		public float MeshUpdateTime { get; set; } = 0.1f;
 
 		private void Start()
 		{
-			var comp = new RuntimeASTCompiler();
-			comp.CompileFunction("3");
+			_runtimeASTCompiler = new RuntimeASTCompiler();
 
-			System.Linq.Expressions.Expression<Func<float, float, float, float>> ex = (x, y, z) =>
-				Mathf.Pow(Mathf.Sqrt(x * x + z * z) - 9, 2) + 1 * Mathf.Pow(y + Mathf.Sin(7f * Mathf.Atan2(z, x)), 2) - 5f;
-
-			var compiled = ex.Compile();
-			//MetaSurface.ImplicitShapes.Clear();
-			MetaSurface.Evaluate = compiled;
+			if (_expressionString == null)
+			{
+				MetaSurface.Evaluate = (x, y, z) =>
+				   Mathf.Pow(Mathf.Sqrt(x * x + z * z) - 9, 2) + 1 * Mathf.Pow(y + Mathf.Sin(7f * Mathf.Atan2(z, x)), 2) - 5f;
+			}
+			else
+			{
+				Expression = _expressionString;
+			}
 
 			var model = Content.CreateVirtualAsset<Model>();
 			model.SetupLODs(1);
@@ -73,7 +93,7 @@ namespace NinaBirthday.ImplicitSurface
 			{
 				ShouldUpdateMesh = false;
 				Debug.Log("Up");
-				MetaSurface.Polygonize(new BoundingBox(new Vector3(-6), new Vector3(6)));
+				MetaSurface.Polygonize(BoundingBox);
 				var vertices = MetaSurface.Vertices;
 				var triangles = MetaSurface.Indices;
 				var normals = MetaSurface.Normals;
@@ -86,16 +106,6 @@ namespace NinaBirthday.ImplicitSurface
 			}
 		}
 
-		public void RemoveShape(ImplicitShape shape)
-		{
-			ImplicitShapes.Remove(shape);
-		}
-
-		public void AddShape(ImplicitShape shape)
-		{
-			ImplicitShapes.Add(shape);
-		}
-
 		public void UpdateMesh()
 		{
 			ShouldUpdateMesh = true;
@@ -103,6 +113,8 @@ namespace NinaBirthday.ImplicitSurface
 
 		private void RecompileExpression(string expression)
 		{
+			if (_runtimeASTCompiler == null) return;
+
 			Func<float, float, float, float> compiledExpression = null;
 			try
 			{
@@ -118,6 +130,16 @@ namespace NinaBirthday.ImplicitSurface
 				MetaSurface.Evaluate = compiledExpression;
 				UpdateMesh();
 			}
+		}
+
+		private void OnDebugDrawSelected()
+		{
+			var localBB = new BoundingBox(
+					-BoundingBoxSize * Actor.Scale + Actor.Position,
+					BoundingBoxSize * Actor.Scale + Actor.Position
+				);
+			DebugDraw.DrawBox(Actor.Box, Color.White);
+			DebugDraw.DrawBox(localBB, Color.Red);
 		}
 	}
 }

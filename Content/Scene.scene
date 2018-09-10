@@ -121,11 +121,16 @@
 			"Transform": {
 				"Translation": {
 					"X": 0.0,
-					"Y": 0.0,
-					"Z": -151.1709747314453
+					"Y": 19.73358917236328,
+					"Z": -173.38906860351563
+				},
+				"Scale": {
+					"X": 1.4454092979431153,
+					"Y": 1.4454092979431153,
+					"Z": 1.4454092979431153
 				}
 			},
-			"Model": "10cf2ca24242a83a36aba3ac707cab84",
+			"Model": "970556d6459c741a49463eb46fc88f2d",
 			"Buffer": {
 				"Entries": [
 					{
@@ -139,9 +144,14 @@
 			"ID": "029a2acb44b778b9e76fd88628b0957e",
 			"ParentID": "fdb5d9404134d19c06a8da9439da149f",
 			"V": {
+	"_boundingBoxSize": {
+		"X": 12.0,
+		"Y": 10.0,
+		"Z": 12.0
+	},
 	"Material": "5e05cef14b8020a6f0ef4d87631ed017",
 	"Expression": "Pow(Sqrt(x * x + z * z) - 9, 2) + 1 * Pow(y + Sin(7 * Atan2(z, x)), 2) - 5",
-	"MeshUpdateTime": 1.0
+	"MeshUpdateTime": 0.1
 }
 		},
 		{
@@ -260,6 +270,68 @@
 	"Damping": 0.01,
 	"Camera": "b0d72c3746caebca055e1f921ca21c7c"
 }
+		},
+		{
+			"TypeID": 1,
+			"ID": "1b8b3a02416fb707a2de6f8f943a0ccf",
+			"ParentID": "74a68a984824b4510d12589f199ad68f",
+			"Name": "Experiments",
+			"Transform": {
+				"Translation": {
+					"X": -55.360530853271487,
+					"Y": 19.73358917236328,
+					"Z": -173.38906860351563
+				},
+				"Scale": {
+					"X": 1.4454092979431153,
+					"Y": 1.4454092979431153,
+					"Z": 1.4454092979431153
+				}
+			},
+			"Model": "e0a2fc6745df53061d69849aec942a30",
+			"Buffer": {
+				"Entries": [
+					{
+						"Material": "5e05cef14b8020a6f0ef4d87631ed017"
+					}
+				]
+			}
+		},
+		{
+			"TypeID": "NinaBirthday.ImplicitSurface.ImplicitSurface",
+			"ID": "d9963cb64a11b5e1d1bbf68faf12bdd2",
+			"ParentID": "1b8b3a02416fb707a2de6f8f943a0ccf",
+			"V": {
+	"_boundingBoxSize": {
+		"X": 5.0,
+		"Y": 10.0,
+		"Z": 5.0
+	},
+	"Material": "5e05cef14b8020a6f0ef4d87631ed017",
+	"Expression": "((x*x+y*y+(z)**2)-10)-(18/(x*x+z*z+2.5)-y*0.1-1)*max(0,y)",
+	"MeshUpdateTime": 0.1
+}
+		},
+		{
+			"TypeID": 1,
+			"ID": "112f418542d468a7d16aa7913751611c",
+			"ParentID": "74a68a984824b4510d12589f199ad68f",
+			"Name": "Plane",
+			"Transform": {
+				"Translation": {
+					"X": -33.487548828125,
+					"Y": 160.88441467285157,
+					"Z": -517.761962890625
+				}
+			},
+			"Model": "54a1ff4a42af9f018234f7b39b1366b3",
+			"Buffer": {
+				"Entries": [
+					{
+						"Material": "5cd673244795af844b359f90628ecc4c"
+					}
+				]
+			}
 		}
 	]
 }
