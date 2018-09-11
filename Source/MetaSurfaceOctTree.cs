@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FlaxEngine;
 
 namespace NinaBirthday.MetaSurf
@@ -83,23 +84,25 @@ namespace NinaBirthday.MetaSurf
 			Vector3 center = _boundingBox.Center;
 			Vector3[] corners = _boundingBox.GetCorners();
 
-			_children = new MetaSurfaceOctTree[corners.Length];
+			var children = new List<MetaSurfaceOctTree>(corners.Length);
 
 			for (int i = 0; i < corners.Length; i++)
 			{
 				Vector3 min = Vector3.Min(corners[i], center);
 				Vector3 max = Vector3.Max(corners[i], center);
-				_children[i] = new MetaSurfaceOctTree(new BoundingBox(min, max));
+				children[i] = new MetaSurfaceOctTree(new BoundingBox(min, max));
 			}
 
 			// And set their vertices
-			foreach (var child in _children)
+			foreach (var child in children)
 			{
 				foreach (var cell in _cells)
 				{
 					if (child.AddCell(cell)) break;
 				}
 			}
+
+			_children = children.Where(c => !c.IsEmpty).ToArray();
 
 			return true;
 		}
