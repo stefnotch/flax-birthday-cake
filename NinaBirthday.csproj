@@ -58,7 +58,6 @@
     <Compile Include="Source\MetaSurfaceOctTree.cs" />
     <Compile Include="Source\PerlinNoiseGenerator.cs" />
     <Compile Include="Source\ScriptT.cs" />
-    <Compile Include="Source\SpawnMover.cs" />
     <Compile Include="Source\TextureToSDF.cs" />
     <Compile Include="Source\FunctionCompiler\RuntimeASTCompiler.cs" />
     <Compile Include="Source\FunctionCompiler\RuntimeCSharpCompiler.cs" />
