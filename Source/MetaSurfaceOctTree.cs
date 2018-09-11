@@ -18,36 +18,41 @@ namespace NinaBirthday.MetaSurf
 	{
 		public static int MinElementsToSubdivide = 1;
 
+		public BoundingBox BoundingBox { get; private set; }
+
 		private MetaSurfaceOctTree[] _children;
-		private List<MetaSurfaceCell> _cells;
-		private BoundingBox _boundingBox;
+		private List<MetaSurfaceCell> _elements;
 
 		public MetaSurfaceOctTree(BoundingBox boundingBox)
 		{
-			_boundingBox = boundingBox;
-			_cells = new List<MetaSurfaceCell>();
+			BoundingBox = boundingBox;
+			_elements = new List<MetaSurfaceCell>();
 		}
 
-		public MetaSurfaceOctTree(BoundingBox boundingBox, List<MetaSurfaceCell> cells)
+		public MetaSurfaceOctTree(BoundingBox boundingBox, List<MetaSurfaceCell> elements = null)
 		{
-			_boundingBox = boundingBox;
-			_cells = cells;
-		}
-
-		public static MetaSurfaceOctTree From(List<ImplicitShape> shapes)
-		{
-			BoundingBox boundingBox = BoundingBox.Empty;
-			foreach (var shape in shapes)
+			BoundingBox = boundingBox;
+			if (elements == null)
 			{
-				boundingBox = BoundingBox.Merge(boundingBox, shape.BoundingBox);
+				_elements = new List<MetaSurfaceCell>();
 			}
-			var octree = new MetaSurfaceOctTree(boundingBox);
-
-			/*foreach (var cell in _cells)
+			else
 			{
-				if (octree.AddCell(cell)) break;
-			}*/
-			return octree;
+				_elements = elements;
+			}
+			RecursiveSubdivide();
+		}
+
+		public void AddBoundingBox(BoundingBox boundingBox)
+		{
+			//Subdivide
+		}
+
+		public void RemoveBoundingBox(BoundingBox boundingBox)
+		{
+			if (_children.Length == 0) return;
+
+			//Un-subdivide
 		}
 
 		/*public MetaSurfaceCell this[int x, int y, int z]
@@ -58,9 +63,9 @@ namespace NinaBirthday.MetaSurf
 			}
 		}*/
 
-		public bool IsEmpty => _cells.Count == 0;
+		public bool IsEmpty => _elements.Count == 0;
 
-		public void RecursiveSubdivide()
+		private void RecursiveSubdivide()
 		{
 			if (Subdivide())
 			{
@@ -77,12 +82,12 @@ namespace NinaBirthday.MetaSurf
 		/// <returns>If it succeeded</returns>
 		public bool Subdivide()
 		{
-			if (_cells.Count <= 0) return false;
-			if (_cells.Count <= MinElementsToSubdivide) return false;
+			if (_elements.Count <= 0) return false;
+			if (_elements.Count <= MinElementsToSubdivide) return false;
 
 			// Create the child bounding boxes
-			Vector3 center = _boundingBox.Center;
-			Vector3[] corners = _boundingBox.GetCorners();
+			Vector3 center = BoundingBox.Center;
+			Vector3[] corners = BoundingBox.GetCorners();
 
 			var children = new List<MetaSurfaceOctTree>(corners.Length);
 
@@ -96,27 +101,27 @@ namespace NinaBirthday.MetaSurf
 			// And set their vertices
 			foreach (var child in children)
 			{
-				foreach (var cell in _cells)
+				foreach (var cell in _elements)
 				{
-					if (child.AddCell(cell)) break;
+					if (child.AddElement(cell)) break;
 				}
 			}
 
 			_children = children.Where(c => !c.IsEmpty).ToArray();
 
-			return true;
+			return _children.Length > 0;
 		}
 
 		/// <summary>
 		/// Attempts to add a vertex to this <see cref="OctTreeCell"/>
 		/// </summary>
-		/// <param name="cell">The vertex to add</param>
+		/// <param name="element">The vertex to add</param>
 		/// <returns>If it succeeded</returns>
-		private bool AddCell(MetaSurfaceCell cell)
+		private bool AddElement(MetaSurfaceCell element)
 		{
-			if (ContainsCell(cell))
+			if (ContainsElement(element))
 			{
-				_cells.Add(cell);
+				_elements.Add(element);
 				return true;
 			}
 			else
@@ -128,14 +133,14 @@ namespace NinaBirthday.MetaSurf
 		/// <summary>
 		/// Checks if this <see cref="OctTreeCell"/> contains the given vertex
 		/// </summary>
-		/// <param name="cell">The vertex to check</param>
+		/// <param name="element">The vertex to check</param>
 		/// <returns>If it's a part of this <see cref="OctTreeCell"/></returns>
-		private bool ContainsCell(MetaSurfaceCell cell)
+		private bool ContainsElement(MetaSurfaceCell element)
 		{
 			return
-				_boundingBox.Minimum.X <= cell.Position.X && cell.Position.X < _boundingBox.Maximum.X &&
-				_boundingBox.Minimum.Y <= cell.Position.Y && cell.Position.Y < _boundingBox.Maximum.Y &&
-				_boundingBox.Minimum.Z <= cell.Position.Z && cell.Position.Z < _boundingBox.Maximum.Z;
+				BoundingBox.Minimum.X <= element.Position.X && element.Position.X < BoundingBox.Maximum.X &&
+				BoundingBox.Minimum.Y <= element.Position.Y && element.Position.Y < BoundingBox.Maximum.Y &&
+				BoundingBox.Minimum.Z <= element.Position.Z && element.Position.Z < BoundingBox.Maximum.Z;
 		}
 	}
 }
