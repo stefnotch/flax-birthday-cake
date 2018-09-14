@@ -117,7 +117,7 @@
 			"TypeID": 1,
 			"ID": "fdb5d9404134d19c06a8da9439da149f",
 			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
-			"Name": "ImplicitCherries (LSD-Fiebertraum)",
+			"Name": "ImplicitCherries",
 			"Transform": {
 				"Translation": {
 					"X": 0.0,
@@ -130,7 +130,7 @@
 					"Z": 1.4454092979431153
 				}
 			},
-			"Model": "ea953417461a54a7f86d1b919f7f2861",
+			"Model": "70030c6149f843a33d4257b8ccbd1d52",
 			"Buffer": {
 				"Entries": [
 					{
@@ -288,7 +288,7 @@
 					"Z": 1.4454092979431153
 				}
 			},
-			"Model": "034c1714448e78150777c9bcf76d953f",
+			"Model": "4f3b80d24cf88d08f5ca66a2a018fe47",
 			"Buffer": {
 				"Entries": [
 					{
@@ -332,6 +332,87 @@
 					}
 				]
 			}
+		},
+		{
+			"TypeID": 1,
+			"ID": "500704ca40ae2ad8b0b9f4bf5b5a1be1",
+			"ParentID": "74a68a984824b4510d12589f199ad68f",
+			"Name": "SDF 0",
+			"Transform": {
+				"Translation": {
+					"X": -382.8801574707031,
+					"Y": 109.68316650390625,
+					"Z": -155.6449432373047
+				}
+			},
+			"Model": "54a1ff4a42af9f018234f7b39b1366b3",
+			"Buffer": {
+				"Entries": [
+					{
+						"Material": "421f1b1b4756ec49f987788cd47960a1"
+					}
+				]
+			}
+		},
+		{
+			"TypeID": 1,
+			"ID": "bba61fc34356c76053947bb466ddbe9f",
+			"ParentID": "74a68a984824b4510d12589f199ad68f",
+			"Name": "SDF 1",
+			"Transform": {
+				"Translation": {
+					"X": -382.8801574707031,
+					"Y": 109.68316650390625,
+					"Z": -710.358154296875
+				}
+			},
+			"Model": "54a1ff4a42af9f018234f7b39b1366b3",
+			"Buffer": {
+				"Entries": [
+					{
+						"Material": "f01e030744ec87be8f5d90a3f8a4e1e3"
+					}
+				]
+			}
+		},
+		{
+			"TypeID": "NinaBirthday.Source.Class1",
+			"ID": "f0f7532041f866df212009bd2f623ba1",
+			"ParentID": "bba61fc34356c76053947bb466ddbe9f",
+			"V": {
+	"Material": "421f1b1b4756ec49f987788cd47960a1",
+	"Texture": "9af981a8409b0d535ffb339e3e20328f"
+}
+		},
+		{
+			"TypeID": 1,
+			"ID": "ad9904ef47940bb8a808dc8850df640b",
+			"ParentID": "74a68a984824b4510d12589f199ad68f",
+			"Name": "SDF",
+			"Transform": {
+				"Translation": {
+					"X": -382.8801574707031,
+					"Y": 109.68316650390625,
+					"Z": -435.5868225097656
+				}
+			},
+			"Model": "54a1ff4a42af9f018234f7b39b1366b3",
+			"Buffer": {
+				"Entries": [
+					{
+						"Material": "c1f0848543128f23b515ab821874a422"
+					}
+				]
+			}
+		},
+		{
+			"TypeID": "NinaBirthday.Source.Class1",
+			"ID": "740136ed4bc3d4887a322f8b72618d03",
+			"ParentID": "ad9904ef47940bb8a808dc8850df640b",
+			"V": {
+	"Material": "a4813f664b41555ca2236e9543e04279",
+	"Texture": "9af981a8409b0d535ffb339e3e20328f"
+}
 		}
 	]
 }

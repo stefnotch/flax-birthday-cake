@@ -100,7 +100,13 @@ namespace AST
 
 			if (output.Count > 1) throw new ParserException("Too many operands");
 
-			var topNode = output.Pop();
+			ASTNode topNode;
+			if (output.Count == 0)
+			{
+				topNode = null;
+			}
+
+			topNode = output.Pop();
 			output.Clear();
 			stack.Clear();
 			return topNode;

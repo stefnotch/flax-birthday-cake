@@ -59,6 +59,7 @@ namespace NinaBirthday.FunctionCompiler
 		public Func<float, float, float, float> CompileFunction(string text)
 		{
 			var topNode = _parser.Parse(_tokenizer.Tokenize(text));
+			if (topNode == null) return null;
 
 			_parameterX = Expression.Parameter(typeof(float), "x");
 			_parameterY = Expression.Parameter(typeof(float), "y");

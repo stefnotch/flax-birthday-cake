@@ -9,14 +9,21 @@ namespace NinaBirthday
 {
 	public class ScriptT<T> : Script where T : Actor
 	{
-		new public T Actor { get; private set; }
+		private T _actor;
 
-		public void Awake()
+		new public T Actor
 		{
-			Actor = base.Actor.As<T>();
-			if (Actor == null)
+			get
 			{
-				Debug.LogError("Not attached to an actor of the type " + typeof(T));
+				if (_actor == null)
+				{
+					_actor = base.Actor.As<T>();
+					if (_actor == null)
+					{
+						Debug.LogError("Not attached to an actor of the type " + typeof(T));
+					}
+				}
+				return _actor;
 			}
 		}
 	}

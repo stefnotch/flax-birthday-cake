@@ -30,7 +30,6 @@ namespace NinaBirthday.MetaSurf
 			{
 				_elements = elements;
 			}
-			RecursiveSubdivide();
 		}
 
 		public static int MinElementsToSubdivide = 1;
@@ -95,14 +94,17 @@ namespace NinaBirthday.MetaSurf
 			}
 		}*/
 
-		private void RecursiveSubdivide()
+		/// <summary>
+		/// Subdivides a gives tree as much as it can
+		/// </summary>
+		public void SubdivideAll()
 		{
 			var bb = BoundingBox;
 			if (Subdivide(ref bb))
 			{
 				foreach (var child in _children)
 				{
-					child.RecursiveSubdivide();
+					child.SubdivideAll();
 				}
 			}
 		}

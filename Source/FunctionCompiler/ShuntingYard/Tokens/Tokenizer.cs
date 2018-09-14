@@ -126,6 +126,13 @@ namespace AST.Tokens
 				var token = GetNextToken(input, ref index, previousToken);
 				previousToken = token;
 
+				if (token == null)
+				{
+					FlaxEngine.Debug.Log(token);
+					FlaxEngine.Debug.Log(input);
+					FlaxEngine.Debug.Log(index);
+					FlaxEngine.Debug.Log(previousToken);
+				}
 				yield return token;
 				SkipWhitespace(input, ref index);
 			}

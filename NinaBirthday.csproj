@@ -55,9 +55,11 @@
     <Compile Include="Source\Billboard.cs" />
     <Compile Include="Source\CakeCamera.cs" />
     <Compile Include="Source\CircleSpawner.cs" />
-    <Compile Include="Source\MetaSurfaceOctTree.cs" />
+    <Compile Include="Source\Class1.cs" />
+    <Compile Include="Source\OctTreeCell.cs" />
     <Compile Include="Source\PerlinNoiseGenerator.cs" />
     <Compile Include="Source\ScriptT.cs" />
+    <Compile Include="Source\TextureCopy.cs" />
     <Compile Include="Source\TextureToSDF.cs" />
     <Compile Include="Source\FunctionCompiler\RuntimeASTCompiler.cs" />
     <Compile Include="Source\FunctionCompiler\RuntimeCSharpCompiler.cs" />
@@ -78,7 +80,7 @@
     <Compile Include="Source\ImplicitSurface\MetaSurf\ImplicitShape.cs" />
     <Compile Include="Source\ImplicitSurface\MetaSurf\MCubes.cs" />
     <Compile Include="Source\ImplicitSurface\MetaSurf\MetaSurface.cs" />
-    <Compile Include="Source\ImplicitSurface\MetaSurf\OctTreeCell.cs" />
+    <Compile Include="Source\ImplicitSurface\MetaSurf\MetaSurfaceOctTree.cs" />
     <Compile Include="Source\SugarThingy\RandomColor.cs" />
     <Compile Include="Source\SugarThingy\RandomOrientation.cs" />
     <Compile Include="Cache\AssemblyInfo.cs" />
