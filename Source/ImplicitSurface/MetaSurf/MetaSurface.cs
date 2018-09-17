@@ -818,7 +818,7 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 						}
 						if ((edges & 2) != 0)
 						{
-							vertexIndices[1] = GetEdgeIndex(ref c2.EdgeXIndex, c2, c1);
+							vertexIndices[1] = GetEdgeIndex(ref c2.EdgeYIndex, c2, c1);
 						}
 						if ((edges & 4) != 0)
 						{
@@ -826,7 +826,7 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 						}
 						if ((edges & 8) != 0)
 						{
-							vertexIndices[3] = GetEdgeIndex(ref c3.EdgeXIndex, c3, c0);
+							vertexIndices[3] = GetEdgeIndex(ref c3.EdgeYIndex, c3, c0);
 						}
 						if ((edges & 16) != 0)
 						{
@@ -834,7 +834,7 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 						}
 						if ((edges & 32) != 0)
 						{
-							vertexIndices[5] = GetEdgeIndex(ref c6.EdgeXIndex, c6, c5);
+							vertexIndices[5] = GetEdgeIndex(ref c6.EdgeYIndex, c6, c5);
 						}
 						if ((edges & 64) != 0)
 						{
@@ -842,23 +842,23 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 						}
 						if ((edges & 128) != 0)
 						{
-							vertexIndices[7] = GetEdgeIndex(ref c7.EdgeXIndex, c7, c4);
+							vertexIndices[7] = GetEdgeIndex(ref c7.EdgeYIndex, c7, c4);
 						}
 						if ((edges & 256) != 0)
 						{
-							vertexIndices[8] = GetEdgeIndex(ref c0.EdgeXIndex, c0, c4);
+							vertexIndices[8] = GetEdgeIndex(ref c0.EdgeZIndex, c0, c4);
 						}
 						if ((edges & 512) != 0)
 						{
-							vertexIndices[9] = GetEdgeIndex(ref c1.EdgeXIndex, c1, c5);
+							vertexIndices[9] = GetEdgeIndex(ref c1.EdgeZIndex, c1, c5);
 						}
 						if ((edges & 1024) != 0)
 						{
-							vertexIndices[10] = GetEdgeIndex(ref c2.EdgeXIndex, c2, c6);
+							vertexIndices[10] = GetEdgeIndex(ref c2.EdgeZIndex, c2, c6);
 						}
 						if ((edges & 2048) != 0)
 						{
-							vertexIndices[11] = GetEdgeIndex(ref c3.EdgeXIndex, c3, c7);
+							vertexIndices[11] = GetEdgeIndex(ref c3.EdgeZIndex, c3, c7);
 						}
 
 

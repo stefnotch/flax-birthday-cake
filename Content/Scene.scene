@@ -115,6 +115,47 @@
 		},
 		{
 			"TypeID": 1,
+			"ID": "f0e4ee974fdd7512b8f1fc8539b9f4a9",
+			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
+			"Name": "ImplicitCherries 0",
+			"Transform": {
+				"Translation": {
+					"X": -36.178741455078128,
+					"Y": -15.155895233154297,
+					"Z": -242.49722290039063
+				},
+				"Scale": {
+					"X": 1.5,
+					"Y": 1.5,
+					"Z": 1.5
+				}
+			},
+			"Model": "83ed839e4f01ef8769368b86ec60cf65",
+			"Buffer": {
+				"Entries": [
+					{
+						"Material": "5e05cef14b8020a6f0ef4d87631ed017"
+					}
+				]
+			}
+		},
+		{
+			"TypeID": "NinaBirthday.ImplicitSurface.ImplicitSurface",
+			"ID": "5d6e30f140718b89cab08aa3ac693a8b",
+			"ParentID": "f0e4ee974fdd7512b8f1fc8539b9f4a9",
+			"V": {
+	"_boundingBoxSize": {
+		"X": 12.0,
+		"Y": 10.0,
+		"Z": 12.0
+	},
+	"Material": "5e05cef14b8020a6f0ef4d87631ed017",
+	"Expression": "Sin(x * 0.5)+Cos(y*.5)+Sin(z*0.5)",
+	"MeshUpdateTime": 0.1
+}
+		},
+		{
+			"TypeID": 1,
 			"ID": "fdb5d9404134d19c06a8da9439da149f",
 			"ParentID": "f8d4978a4fad4cf6ebea3696e5deeee6",
 			"Name": "ImplicitCherries",
@@ -125,12 +166,12 @@
 					"Z": -173.38906860351563
 				},
 				"Scale": {
-					"X": 1.4454092979431153,
-					"Y": 1.4454092979431153,
-					"Z": 1.4454092979431153
+					"X": 2.9350342750549318,
+					"Y": 2.9350342750549318,
+					"Z": 2.9350342750549318
 				}
 			},
-			"Model": "70030c6149f843a33d4257b8ccbd1d52",
+			"Model": "eac175ed485fe77cfb34c2b1cd95ca87",
 			"Buffer": {
 				"Entries": [
 					{
@@ -278,8 +319,8 @@
 			"Name": "Experiments",
 			"Transform": {
 				"Translation": {
-					"X": -55.360530853271487,
-					"Y": 19.73358917236328,
+					"X": -62.58278274536133,
+					"Y": 25.523574829101564,
 					"Z": -173.38906860351563
 				},
 				"Scale": {
@@ -288,7 +329,7 @@
 					"Z": 1.4454092979431153
 				}
 			},
-			"Model": "4f3b80d24cf88d08f5ca66a2a018fe47",
+			"Model": "0be56e7c42d8af92548912b75326de36",
 			"Buffer": {
 				"Entries": [
 					{
@@ -349,7 +390,7 @@
 			"Buffer": {
 				"Entries": [
 					{
-						"Material": "421f1b1b4756ec49f987788cd47960a1"
+						"Material": "a4813f664b41555ca2236e9543e04279"
 					}
 				]
 			}
@@ -370,7 +411,7 @@
 			"Buffer": {
 				"Entries": [
 					{
-						"Material": "f01e030744ec87be8f5d90a3f8a4e1e3"
+						"Material": "0e35b7ed4dea0b8bd879d0bd94e2dc1f"
 					}
 				]
 			}
@@ -381,7 +422,7 @@
 			"ParentID": "bba61fc34356c76053947bb466ddbe9f",
 			"V": {
 	"Material": "421f1b1b4756ec49f987788cd47960a1",
-	"Texture": "9af981a8409b0d535ffb339e3e20328f"
+	"Texture": "3d6958f5493255e472c5ea99ad89bf82"
 }
 		},
 		{
@@ -400,7 +441,7 @@
 			"Buffer": {
 				"Entries": [
 					{
-						"Material": "c1f0848543128f23b515ab821874a422"
+						"Material": "bee8498f4b5b71d23d866ebccef7f139"
 					}
 				]
 			}
@@ -410,8 +451,7 @@
 			"ID": "740136ed4bc3d4887a322f8b72618d03",
 			"ParentID": "ad9904ef47940bb8a808dc8850df640b",
 			"V": {
-	"Material": "a4813f664b41555ca2236e9543e04279",
-	"Texture": "9af981a8409b0d535ffb339e3e20328f"
+	"Material": "a4813f664b41555ca2236e9543e04279"
 }
 		}
 	]
