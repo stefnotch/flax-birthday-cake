@@ -18,7 +18,7 @@ namespace NinaBirthday.Source
 			return grid.ToTexture(spreadRadius);
 		}
 
-		private class SDFGrid
+		public class SDFGrid
 		{
 			public SDFGrid(int width, int height)
 			{
@@ -31,6 +31,16 @@ namespace NinaBirthday.Source
 
 			public int Width { get; }
 			public int Height { get; }
+
+			public float this[int x, int y]
+			{
+				get
+				{
+					float dist1 = _gridPos[x + 1, y + 1].Length;
+					float dist2 = _gridNeg[x + 1, y + 1].Length;
+					return dist1 - dist2;
+				}
+			}
 
 			private readonly Int2[,] _gridPos;
 			private readonly Int2[,] _gridNeg;
@@ -56,7 +66,7 @@ namespace NinaBirthday.Source
 							for (int x = 0; x < texture.Width; x++)
 							{
 								var color = colorsPtr[y * texture.Width + x];
-								int dist = (color.R > 128) ? EMPTY : 0;
+								int dist = (int)(color.R > 128 + 50 ? EMPTY : 0);
 								grid._gridPos[x + 1, y + 1] = new Int2(dist);
 								grid._gridNeg[x + 1, y + 1] = new Int2(EMPTY - dist);
 							}
@@ -178,10 +188,8 @@ namespace NinaBirthday.Source
 						{
 							for (int x = 0; x < initData.Width; x++)
 							{
-								float dist1 = _gridPos[x + 1, y + 1].Length;
-								float dist2 = _gridNeg[x + 1, y + 1].Length;
 
-								float dist = (Mathf.Clamp((dist1 - dist2) / spreadRadius, -1f, 1f) + 1f) / 2f;
+								float dist = (Mathf.Clamp(this[x, y] / spreadRadius, -1f, 1f) + 1f) / 2f;
 
 								colorsPtr[y * initData.Width + x] = Color32.Lerp(Color.Black, Color.White, dist);
 							}

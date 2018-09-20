@@ -122,7 +122,7 @@
 				"Translation": {
 					"X": -36.178741455078128,
 					"Y": -15.155895233154297,
-					"Z": -242.49722290039063
+					"Z": -309.0440673828125
 				},
 				"Scale": {
 					"X": 1.5,
@@ -130,7 +130,7 @@
 					"Z": 1.5
 				}
 			},
-			"Model": "83ed839e4f01ef8769368b86ec60cf65",
+			"Model": "a2509d834a16526a1ef6ef9f504426a6",
 			"Buffer": {
 				"Entries": [
 					{
@@ -150,7 +150,7 @@
 		"Z": 12.0
 	},
 	"Material": "5e05cef14b8020a6f0ef4d87631ed017",
-	"Expression": "Sin(x * 0.5)+Cos(y*.5)+Sin(z*0.5)",
+	"Expression": "cos(x^2+z^2)-y",
 	"MeshUpdateTime": 0.1
 }
 		},
@@ -171,7 +171,7 @@
 					"Z": 2.9350342750549318
 				}
 			},
-			"Model": "eac175ed485fe77cfb34c2b1cd95ca87",
+			"Model": "189a16f84ca80035564e7a838294f26a",
 			"Buffer": {
 				"Entries": [
 					{
@@ -314,6 +314,47 @@
 		},
 		{
 			"TypeID": 1,
+			"ID": "3e4fa1c442f2d741d151819128c46c81",
+			"ParentID": "74a68a984824b4510d12589f199ad68f",
+			"Name": "Experiments 0",
+			"Transform": {
+				"Translation": {
+					"X": -62.58278274536133,
+					"Y": 25.523574829101564,
+					"Z": -173.38906860351563
+				},
+				"Scale": {
+					"X": 1.4454092979431153,
+					"Y": 1.4454092979431153,
+					"Z": 1.4454092979431153
+				}
+			},
+			"Model": "f81d2ad942f168f4fc69d8b791ab4abf",
+			"Buffer": {
+				"Entries": [
+					{
+						"Material": "5e05cef14b8020a6f0ef4d87631ed017"
+					}
+				]
+			}
+		},
+		{
+			"TypeID": "NinaBirthday.ImplicitSurface.ImplicitSurface",
+			"ID": "9a4fb55d42038631e427c0afdebf5e77",
+			"ParentID": "3e4fa1c442f2d741d151819128c46c81",
+			"V": {
+	"_boundingBoxSize": {
+		"X": 5.0,
+		"Y": 10.0,
+		"Z": 5.0
+	},
+	"Material": "5e05cef14b8020a6f0ef4d87631ed017",
+	"Expression": "sin(x)",
+	"MeshUpdateTime": 0.1
+}
+		},
+		{
+			"TypeID": 1,
 			"ID": "1b8b3a02416fb707a2de6f8f943a0ccf",
 			"ParentID": "74a68a984824b4510d12589f199ad68f",
 			"Name": "Experiments",
@@ -329,7 +370,7 @@
 					"Z": 1.4454092979431153
 				}
 			},
-			"Model": "0be56e7c42d8af92548912b75326de36",
+			"Model": "fedcd4d5484e5b05dcd46888f981ee92",
 			"Buffer": {
 				"Entries": [
 					{
@@ -411,7 +452,7 @@
 			"Buffer": {
 				"Entries": [
 					{
-						"Material": "0e35b7ed4dea0b8bd879d0bd94e2dc1f"
+						"Material": "10e225544b13b278bc393d995100a74d"
 					}
 				]
 			}
@@ -441,7 +482,7 @@
 			"Buffer": {
 				"Entries": [
 					{
-						"Material": "bee8498f4b5b71d23d866ebccef7f139"
+						"Material": "7b9dc86e4e31b5ef273ac19b5e58fc59"
 					}
 				]
 			}
@@ -451,7 +492,47 @@
 			"ID": "740136ed4bc3d4887a322f8b72618d03",
 			"ParentID": "ad9904ef47940bb8a808dc8850df640b",
 			"V": {
-	"Material": "a4813f664b41555ca2236e9543e04279"
+	"Material": "a4813f664b41555ca2236e9543e04279",
+	"Texture": "3d6958f5493255e472c5ea99ad89bf82"
+}
+		},
+		{
+			"TypeID": 1,
+			"ID": "b19794c24aacad7d16c05e990f70b502",
+			"ParentID": "74a68a984824b4510d12589f199ad68f",
+			"Name": "Chocolate",
+			"Transform": {
+				"Translation": {
+					"X": -144.87413024902345,
+					"Y": 0.0,
+					"Z": 487.4388122558594
+				}
+			},
+			"Model": "f189b09a4e30868577ad7da4c42d4b00",
+			"Buffer": {
+				"Entries": [
+					{
+						"Material": "608d50de490bbedeb3bbc5a4aaa79016"
+					}
+				]
+			}
+		},
+		{
+			"TypeID": "NinaBirthday.ImplicitChocolate",
+			"ID": "847e5c364199de642009eda333cc08c3",
+			"ParentID": "b19794c24aacad7d16c05e990f70b502",
+			"V": {
+	"_texture": "3da657d94c6bfae7366424a1ba6cbd86",
+	"_material": "5e05cef14b8020a6f0ef4d87631ed017",
+	"Height": 10.0,
+	"Radius": 10.0,
+	"_boundingBoxSize": {
+		"X": 10.0,
+		"Y": 10.0,
+		"Z": 10.0
+	},
+	"MeshUpdateTime": 0.1,
+	"Width": 4.0
 }
 		}
 	]

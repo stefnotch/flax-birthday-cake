@@ -685,14 +685,15 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 		private int _indexCounter;
 
 
-		private int Resolution = 40;
+		private int Resolution = 30;
+		private int SubResolution = 4;
 		private const float Epsilon = 0.001f;
 
 		public MetaSurface()
 		{
 
 			// Setting up all the cells
-			VVV();
+			CreateValuesContainer();
 
 		}
 
@@ -708,7 +709,7 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 			return new Vector3(dx / len, dy / len, dz / len);
 		}
 
-		private Vector3 SurfacePoint(MetaSurfaceCell a, MetaSurfaceCell b)
+		private Vector3 SurfacePoint(ref MetaSurfaceCell a, ref MetaSurfaceCell b)
 		{
 			float t = -a.Value / (b.Value - a.Value);
 
@@ -719,12 +720,12 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 				);
 		}
 
-		private int GetEdgeIndex(ref int edgeIndex, MetaSurfaceCell a, MetaSurfaceCell b)
+		private int GetEdgeIndex(ref int edgeIndex, ref MetaSurfaceCell a, ref MetaSurfaceCell b)
 		{
-			if (edgeIndex == -1)
+			if (edgeIndex == 0)
 			{
-				Vector3 position = SurfacePoint(a, b);
-				edgeIndex = EmitVertex(position, Normal(ref position));
+				Vector3 position = SurfacePoint(ref a, ref b);
+				edgeIndex = EmitVertex(position, Normal(ref position)) + 1;
 			}
 
 			return edgeIndex;
@@ -737,17 +738,21 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 			//_indices.Add(_indexCounter);
 			return _indexCounter++;
 		}
+		private void EmitTriangle(int v1, int v2, int v3)
+		{
+			_indices.Add(v1);
+			_indices.Add(v2);
+			_indices.Add(v3);
+		}
 
-		private MetaSurfaceCell[,,] Values;
+		private MetaSurfaceCellContainer[,,] ValuesContainer;
 
-		private MetaSurfaceOctTree _octree;
 		private List<ImplicitShape> _shapes;
 
 		public void Polygonize(BoundingBox boundingBox)//List<ImplicitShape> shapes)
 		{
 			Reset();
 
-			_octree = new MetaSurfaceOctTree(boundingBox);
 			/*_shapes = shapes;
 			BoundingBox boundingBox = BoundingBox.Empty;
 			foreach (var shape in shapes)
@@ -761,7 +766,6 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 			float radiusY = boundingBox.Size.Y;
 			float radiusZ = boundingBox.Size.Z;
 
-
 			for (int i = 0; i <= Resolution; i++)
 			{
 				float x = radiusX * ((2f * i) / Resolution - 1f) + center.X;
@@ -772,33 +776,98 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 					{
 						float z = radiusZ * ((2f * k) / Resolution - 1f) + center.Z;
 
-						var cell = this.Values[i, j, k];
-						cell.Position.X = x;
-						cell.Position.Y = y;
-						cell.Position.Z = z;
+						var cell = this.ValuesContainer[i, j, k];
+						cell.Position = new Vector3(x, y, z);
 						cell.Value = Evaluate(x, y, z);
-						cell.EdgeXIndex = -1;
-						cell.EdgeYIndex = -1;
-						cell.EdgeZIndex = -1;
 					}
 				}
 			}
 
-			int[] vertexIndices = new int[12];
+			Vector3 radius = boundingBox.Size / Resolution;
 			for (int i = 0; i < Resolution; i++)
 			{
 				for (int j = 0; j < Resolution; j++)
 				{
 					for (int k = 0; k < Resolution; k++)
 					{
-						var c0 = Values[i, j + 1, k];
-						var c1 = Values[i + 1, j + 1, k];
-						var c2 = Values[i + 1, j, k];
-						var c3 = Values[i, j, k];
-						var c4 = Values[i, j + 1, k + 1];
-						var c5 = Values[i + 1, j + 1, k + 1];
-						var c6 = Values[i + 1, j, k + 1];
-						var c7 = Values[i, j, k + 1];
+						var container = ValuesContainer[i, j, k];
+						if (HasZeroCrossing(ValuesContainer, i, j, k))
+						{
+							CalculateCells(ref container.Values, new BoundingBox(container.Position - radius, container.Position + radius));
+						}
+					}
+				}
+			}
+		}
+
+		private bool HasZeroCrossing(MetaSurfaceCellContainer[,,] valuesContainer, int i, int j, int k)
+		{
+			var c0 = valuesContainer[i, j + 1, k];
+			var c1 = valuesContainer[i + 1, j + 1, k];
+			var c2 = valuesContainer[i + 1, j, k];
+			var c3 = valuesContainer[i, j, k];
+			var c4 = valuesContainer[i, j + 1, k + 1];
+			var c5 = valuesContainer[i + 1, j + 1, k + 1];
+			var c6 = valuesContainer[i + 1, j, k + 1];
+			var c7 = valuesContainer[i, j, k + 1];
+
+			int cubeIndex = 0;
+			if (c0.Value < 0) cubeIndex |= 1;
+			if (c1.Value < 0) cubeIndex |= 2;
+			if (c2.Value < 0) cubeIndex |= 4;
+			if (c3.Value < 0) cubeIndex |= 8;
+			if (c4.Value < 0) cubeIndex |= 16;
+			if (c5.Value < 0) cubeIndex |= 32;
+			if (c6.Value < 0) cubeIndex |= 64;
+			if (c7.Value < 0) cubeIndex |= 128;
+
+			int edges = ImplicitSurfaceTables.EdgeTable[cubeIndex];
+
+			return edges != 0x0;
+		}
+
+		private void CalculateCells(ref MetaSurfaceCell[,,] values1, BoundingBox boundingBox)
+		{
+			var values = new MetaSurfaceCell[SubResolution + 1, SubResolution + 1, SubResolution + 1];
+			float radiusX = boundingBox.Size.X;
+			float radiusY = boundingBox.Size.Y;
+			float radiusZ = boundingBox.Size.Z;
+
+			Vector3 center = boundingBox.Center;
+
+			for (int i = 0; i <= SubResolution; i++)
+			{
+				//If I comment out Resolution *, *something* happens
+				float x = radiusX * ((2f * i) / (SubResolution) - 1f) + center.X;
+				for (int j = 0; j <= SubResolution; j++)
+				{
+					float y = radiusY * ((2f * j) / (SubResolution) - 1f) + center.Y;
+					for (int k = 0; k <= SubResolution; k++)
+					{
+						float z = radiusZ * ((2f * k) / (SubResolution) - 1f) + center.Z;
+
+						values[i, j, k] = new MetaSurfaceCell();
+						values[i, j, k].Position = new Vector3(x, y, z);
+						values[i, j, k].Value = Evaluate(x, y, z);
+					}
+				}
+			}
+
+			int[] vertexIndices = new int[12];
+			for (int i = 0; i < SubResolution; i++)
+			{
+				for (int j = 0; j < SubResolution; j++)
+				{
+					for (int k = 0; k < SubResolution; k++)
+					{
+						var c0 = values[i, j + 1, k];
+						var c1 = values[i + 1, j + 1, k];
+						var c2 = values[i + 1, j, k];
+						var c3 = values[i, j, k];
+						var c4 = values[i, j + 1, k + 1];
+						var c5 = values[i + 1, j + 1, k + 1];
+						var c6 = values[i + 1, j, k + 1];
+						var c7 = values[i, j, k + 1];
 
 						int cubeIndex = 0;
 						if (c0.Value < 0) cubeIndex |= 1;
@@ -814,91 +883,80 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 
 						if ((edges & 1) != 0)
 						{
-							vertexIndices[0] = GetEdgeIndex(ref c0.EdgeXIndex, c0, c1);
+							vertexIndices[0] = GetEdgeIndex(ref c0.EdgeXIndex, ref c0, ref c1);
 						}
 						if ((edges & 2) != 0)
 						{
-							vertexIndices[1] = GetEdgeIndex(ref c2.EdgeYIndex, c2, c1);
+							vertexIndices[1] = GetEdgeIndex(ref c2.EdgeYIndex, ref c2, ref c1);
 						}
 						if ((edges & 4) != 0)
 						{
-							vertexIndices[2] = GetEdgeIndex(ref c3.EdgeXIndex, c3, c2);
+							vertexIndices[2] = GetEdgeIndex(ref c3.EdgeXIndex, ref c3, ref c2);
 						}
 						if ((edges & 8) != 0)
 						{
-							vertexIndices[3] = GetEdgeIndex(ref c3.EdgeYIndex, c3, c0);
+							vertexIndices[3] = GetEdgeIndex(ref c3.EdgeYIndex, ref c3, ref c0);
 						}
 						if ((edges & 16) != 0)
 						{
-							vertexIndices[4] = GetEdgeIndex(ref c4.EdgeXIndex, c4, c5);
+							vertexIndices[4] = GetEdgeIndex(ref c4.EdgeXIndex, ref c4, ref c5);
 						}
 						if ((edges & 32) != 0)
 						{
-							vertexIndices[5] = GetEdgeIndex(ref c6.EdgeYIndex, c6, c5);
+							vertexIndices[5] = GetEdgeIndex(ref c6.EdgeYIndex, ref c6, ref c5);
 						}
 						if ((edges & 64) != 0)
 						{
-							vertexIndices[6] = GetEdgeIndex(ref c7.EdgeXIndex, c7, c6);
+							vertexIndices[6] = GetEdgeIndex(ref c7.EdgeXIndex, ref c7, ref c6);
 						}
 						if ((edges & 128) != 0)
 						{
-							vertexIndices[7] = GetEdgeIndex(ref c7.EdgeYIndex, c7, c4);
+							vertexIndices[7] = GetEdgeIndex(ref c7.EdgeYIndex, ref c7, ref c4);
 						}
 						if ((edges & 256) != 0)
 						{
-							vertexIndices[8] = GetEdgeIndex(ref c0.EdgeZIndex, c0, c4);
+							vertexIndices[8] = GetEdgeIndex(ref c0.EdgeZIndex, ref c0, ref c4);
 						}
 						if ((edges & 512) != 0)
 						{
-							vertexIndices[9] = GetEdgeIndex(ref c1.EdgeZIndex, c1, c5);
+							vertexIndices[9] = GetEdgeIndex(ref c1.EdgeZIndex, ref c1, ref c5);
 						}
 						if ((edges & 1024) != 0)
 						{
-							vertexIndices[10] = GetEdgeIndex(ref c2.EdgeZIndex, c2, c6);
+							vertexIndices[10] = GetEdgeIndex(ref c2.EdgeZIndex, ref c2, ref c6);
 						}
 						if ((edges & 2048) != 0)
 						{
-							vertexIndices[11] = GetEdgeIndex(ref c3.EdgeZIndex, c3, c7);
+							vertexIndices[11] = GetEdgeIndex(ref c3.EdgeZIndex, ref c3, ref c7);
 						}
 
 
 						for (int n = 0; n < 16 && ImplicitSurfaceTables.TriangleTable[cubeIndex, n] != -1; n += 3)
 						{
 							this.EmitTriangle(
-									vertexIndices[ImplicitSurfaceTables.TriangleTable[cubeIndex, n]],
-									vertexIndices[ImplicitSurfaceTables.TriangleTable[cubeIndex, n + 1]],
-									vertexIndices[ImplicitSurfaceTables.TriangleTable[cubeIndex, n + 2]]
+									vertexIndices[ImplicitSurfaceTables.TriangleTable[cubeIndex, n]] - 1,
+									vertexIndices[ImplicitSurfaceTables.TriangleTable[cubeIndex, n + 1]] - 1,
+									vertexIndices[ImplicitSurfaceTables.TriangleTable[cubeIndex, n + 2]] - 1
 								);
 						}
-
 					}
 				}
 			}
 		}
 
-		private void EmitTriangle(int v1, int v2, int v3)
+		private void CreateValuesContainer()
 		{
-			_indices.Add(v1);
-			_indices.Add(v2);
-			_indices.Add(v3);
-		}
-
-		private void VVV()
-		{
-			Values = new MetaSurfaceCell[Resolution + 1, Resolution + 1, Resolution + 1];
+			ValuesContainer = new MetaSurfaceCellContainer[Resolution + 1, Resolution + 1, Resolution + 1];
 			for (int i = 0; i <= Resolution; i++)
 			{
 				for (int j = 0; j <= Resolution; j++)
 				{
 					for (int k = 0; k <= Resolution; k++)
 					{
-						this.Values[i, j, k] = new MetaSurfaceCell()
+						ValuesContainer[i, j, k] = new MetaSurfaceCellContainer()
 						{
 							Position = Vector3.Zero,
-							Value = 0,
-							EdgeXIndex = -1,
-							EdgeYIndex = -1,
-							EdgeZIndex = -1
+							Value = 0
 						};
 					}
 				}

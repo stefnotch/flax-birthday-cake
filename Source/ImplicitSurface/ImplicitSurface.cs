@@ -92,7 +92,6 @@ namespace NinaBirthday.ImplicitSurface
 			if (_mesh != null && ShouldUpdateMesh && Time.GameTime - _previousTime > MeshUpdateTime)
 			{
 				ShouldUpdateMesh = false;
-				Debug.Log("Up");
 				MetaSurface.Polygonize(BoundingBox);
 				var vertices = MetaSurface.Vertices;
 				var triangles = MetaSurface.Indices;
@@ -101,6 +100,11 @@ namespace NinaBirthday.ImplicitSurface
 				{
 					Debug.Log("Actual Update");
 					_mesh.UpdateMesh(vertices, triangles, normals);
+				}
+				else
+				{
+
+					Debug.Log("Fake Update");
 				}
 				_previousTime = Time.GameTime;
 			}
