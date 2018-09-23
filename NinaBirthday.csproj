@@ -81,6 +81,8 @@
     <Compile Include="Source\ImplicitSurface\MetaSurf\MCubes.cs" />
     <Compile Include="Source\ImplicitSurface\MetaSurf\MetaSurface.cs" />
     <Compile Include="Source\ImplicitSurface\MetaSurf\MetaSurfaceCell.cs" />
+    <Compile Include="Source\Particles\Emitter.cs" />
+    <Compile Include="Source\Particles\Particle.cs" />
     <Compile Include="Source\SugarThingy\RandomColor.cs" />
     <Compile Include="Source\SugarThingy\RandomOrientation.cs" />
     <Compile Include="Cache\AssemblyInfo.cs" />

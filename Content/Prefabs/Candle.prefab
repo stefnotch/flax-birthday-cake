@@ -29,6 +29,30 @@
 				}
 			]
 		}
+	},
+	{
+		"TypeID": 3,
+		"ID": "5682e6e14d7a2eb4a4152c9dcc1275f2",
+		"ParentID": "2890e2214e8817671f54b1b18d9635d5",
+		"Name": "Flame",
+		"Transform": {
+			"Translation": {
+				"X": 0.0,
+				"Y": 48.58608627319336,
+				"Z": 0.0
+			}
+		}
+	},
+	{
+		"TypeID": "LowQualityParticles.Emitter",
+		"ID": "4ce42faa4fac2e895b206c808309921d",
+		"ParentID": "5682e6e14d7a2eb4a4152c9dcc1275f2",
+		"V": {
+	"Radius": 20.0,
+	"Particle": "7bf89d0f47e26d45b5091593e746ca23",
+	"ParticleCount": 20,
+	"EnabledInEditor": true
+}
 	}
 ]
 }

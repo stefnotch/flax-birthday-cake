@@ -1,0 +1,62 @@
+{
+	"ID": "7bf89d0f47e26d45b5091593e746ca23",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6167,
+	"Data": [
+	{
+		"TypeID": 3,
+		"ID": "97553f4a4442dc4b4bf70cbe6682e921",
+		"ParentID": "00000000000000000000000000000000",
+		"Name": "Root",
+		"Transform": {
+			"Orientation": {
+				"X": 0.0,
+				"Y": 0.7071068286895752,
+				"Z": 0.0,
+				"W": 0.7071068286895752
+			}
+		}
+	},
+	{
+		"TypeID": "LowQualityParticles.Particle",
+		"ID": "ef1a9d4e4d0e2d1262c761a3fd2d3e43",
+		"ParentID": "97553f4a4442dc4b4bf70cbe6682e921",
+		"V": {
+	"TimeToLive": 10.0,
+	"Target": {
+		"X": 0.0,
+		"Y": 60.0,
+		"Z": 0.0
+	},
+	"RandomMotion": 0.1
+}
+	},
+	{
+		"TypeID": 1,
+		"ID": "585c1cf741c6c6d7cab679a4568ea5ad",
+		"ParentID": "97553f4a4442dc4b4bf70cbe6682e921",
+		"Name": "Plane",
+		"Transform": {
+			"Scale": {
+				"X": 0.10000000149011612,
+				"Y": 0.10000000149011612,
+				"Z": 0.10000000149011612
+			}
+		},
+		"Model": "54a1ff4a42af9f018234f7b39b1366b3",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "b4eedc0b42de7eaac0854bb777469d62"
+				}
+			]
+		}
+	},
+	{
+		"TypeID": "NinaBirthday.Billboard",
+		"ID": "11bc4c304e0771d355ca23bd047851f1",
+		"ParentID": "585c1cf741c6c6d7cab679a4568ea5ad",
+		"V": {}
+	}
+]
+}
