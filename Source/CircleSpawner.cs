@@ -13,8 +13,10 @@ namespace NinaBirthday
 		private int _count;
 		private float _randomOffsetRadius;
 
+		[Serialize]
+		private Actor _container;
+
 		public Prefab PrefabToSpawn { get; set; }
-		public Actor Container;
 
 		[Range(0, 1000)]
 		public float CircleRadius
@@ -37,20 +39,43 @@ namespace NinaBirthday
 			set { _count = value; Spawn(); }
 		}
 
+		[NoSerialize]
+		public Actor Container
+		{
+			get => _container;
+#if FLAX_EDITOR
+			set
+			{
+				if (value && !value.HasChildren)
+				{
+					_container = value;
+				}
+			}
+#else
+			set => _container = value;
+#endif
+		}
+
+		private bool _canSpawn;
+
 		private void OnEnable()
 		{
 			// Here you can add code that needs to be called when script is created
+			_canSpawn = true;
 			Spawn();
 		}
 
 		public void Spawn()
 		{
-			if (PrefabToSpawn == null) return;
+			if (!_canSpawn) return;
+			if (!PrefabToSpawn) return;
 
-			if (Container == null || Container.HasChildren)
+			if (!Container)
 			{
 				Container = New<EmptyActor>();
-				this.Actor.AddChild(Container, false);
+				if (!Container) return;
+				Actor.AddChild(Container, false);
+				Container.LocalTransform = Transform.Identity;
 			}
 			else
 			{
@@ -62,7 +87,7 @@ namespace NinaBirthday
 			{
 				var spawnedActor = PrefabManager.SpawnPrefab(PrefabToSpawn, Container);
 				spawnedActor.LocalPosition += Vector3.Forward * Quaternion.RotationY(angle) * CircleRadius;
-				spawnedActor.LocalPosition += _rng.NextVector3() * RandomOffsetRadius;
+				spawnedActor.LocalPosition += new Vector3(_rng.NextFloat(2) - 1, 0, _rng.NextFloat(2) - 1) * RandomOffsetRadius;
 				//spawnedActor.LookAt(this.Actor);
 				angle += Mathf.TwoPi / Count;
 			}
@@ -70,7 +95,9 @@ namespace NinaBirthday
 
 		private void OnDisable()
 		{
-			Destroy(Container);
+			_canSpawn = false;
+
+			Destroy(ref _container);
 		}
 	}
 }

@@ -22,7 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>DEBUG;FLAX_ASSERTIONS;TRACE;FLAX_0;FLAX_0_2;FLAX_0_2_6167;FLAX_EDITOR;FLAX_WINDOWS;FLAX_EDITOR_WIN</DefineConstants>
+    <DefineConstants>DEBUG;FLAX_ASSERTIONS;TRACE;FLAX_0;FLAX_0_2;FLAX_0_2_6168;FLAX_EDITOR;FLAX_WINDOWS;FLAX_EDITOR_WIN</DefineConstants>
 	<UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -33,7 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>TRACE;FLAX_0;FLAX_0_2;FLAX_0_2_6167;FLAX_EDITOR;FLAX_WINDOWS;FLAX_EDITOR_WIN</DefineConstants>
+    <DefineConstants>TRACE;FLAX_0;FLAX_0_2;FLAX_0_2_6168;FLAX_EDITOR;FLAX_WINDOWS;FLAX_EDITOR_WIN</DefineConstants>
 	<UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
@@ -52,6 +52,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\BackgroundCounter.cs" />
     <Compile Include="Source\Billboard.cs" />
     <Compile Include="Source\CakeCamera.cs" />
     <Compile Include="Source\CircleSpawner.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Source\PerlinNoiseGenerator.cs" />
     <Compile Include="Source\ScriptT.cs" />
     <Compile Include="Source\TextureToSDF.cs" />
+    <Compile Include="Source\Wind.cs" />
     <Compile Include="Source\FunctionCompiler\RuntimeASTCompiler.cs" />
     <Compile Include="Source\FunctionCompiler\RuntimeCSharpCompiler.cs" />
     <Compile Include="Source\FunctionCompiler\ShuntingYard\ASTNode.cs" />

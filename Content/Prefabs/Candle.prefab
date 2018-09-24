@@ -1,13 +1,20 @@
 {
 	"ID": "0fe3cd3249487c457908bab3353defcf",
 	"TypeName": "FlaxEngine.Prefab",
-	"EngineBuild": 6167,
+	"EngineBuild": 6168,
 	"Data": [
 	{
 		"TypeID": 3,
 		"ID": "2890e2214e8817671f54b1b18d9635d5",
 		"ParentID": "00000000000000000000000000000000",
-		"Name": "Root"
+		"Name": "Root",
+		"Transform": {
+			"Scale": {
+				"X": 0.20000000298023225,
+				"Y": 0.20000000298023225,
+				"Z": 0.20000000298023225
+			}
+		}
 	},
 	{
 		"TypeID": 1,
@@ -53,6 +60,49 @@
 	"ParticleCount": 20,
 	"EnabledInEditor": true
 }
+	},
+	{
+		"TypeID": 14,
+		"ID": "fa50c712463e78b23a59e8a4e7b5811e",
+		"ParentID": "5682e6e14d7a2eb4a4152c9dcc1275f2",
+		"Name": "BoxCollider",
+		"Transform": {
+			"Translation": {
+				"X": 0.0,
+				"Y": 17.738048553466798,
+				"Z": 0.0
+			}
+		},
+		"IsTrigger": true,
+		"Size": {
+			"X": 150.0,
+			"Y": 150.0,
+			"Z": 150.0
+		}
+	},
+	{
+		"TypeID": 1,
+		"ID": "302916d746441a979436cab41374ccc6",
+		"ParentID": "2890e2214e8817671f54b1b18d9635d5",
+		"Name": "Cylinder",
+		"Transform": {
+			"Translation": {
+				"X": 0.0,
+				"Y": 53.49535369873047,
+				"Z": 0.0
+			},
+			"Scale": {
+				"X": 0.019999999552965165,
+				"Y": 0.15000000596046449,
+				"Z": 0.019999999552965165
+			}
+		},
+		"Model": "223aa9894e90973780ab508621517526",
+		"Buffer": {
+			"Entries": [
+				{}
+			]
+		}
 	}
 ]
 }

@@ -1,7 +1,7 @@
 {
 	"ID": "9354aba74d1be48dd195b087f67dcde2",
 	"TypeName": "FlaxEngine.Prefab",
-	"EngineBuild": 6167,
+	"EngineBuild": 6168,
 	"Data": [
 	{
 		"TypeID": 3,
@@ -35,9 +35,15 @@
 		"ID": "2d11967b42c491a7712557b3aad56b1c",
 		"ParentID": "f81c9669460998d65bb3eaba6b6792c1",
 		"V": {
-	"Material": "5620926c4a3c923239cbdf89411c4b5e",
+	"Material": "d2635a4e43c4eca814908fa7b18818f7",
 	"ParamName": "Color"
 }
+	},
+	{
+		"TypeID": "NinaBirthday.SugarThingy.RandomOrientation",
+		"ID": "9dbc69a34287a30821bfabab785a5da6",
+		"ParentID": "f81c9669460998d65bb3eaba6b6792c1",
+		"V": {}
 	}
 ]
 }

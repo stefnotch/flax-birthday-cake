@@ -12,16 +12,16 @@ namespace LowQualityParticles
 		public float TimeToLive = 10f;
 		private float _maxTimeToLive;
 
-		public Vector3 Target;
+		private Vector3 _target;
 
 		public float RandomMotion = 0.1f;
-
+		public float SpeedMultiplier = 1;
 		private float Speed;
 		private static Random _rng = new Random();
 		private MaterialInstance _instance;
 		private float _maxLength;
 
-		public Action<Actor> ResetCallback;
+		public Func<Particle, bool> ResetCallback;
 
 		private void OnEnable()
 		{
@@ -34,7 +34,7 @@ namespace LowQualityParticles
 
 		private void Reset()
 		{
-			Speed = _rng.NextFloat(50) + 30;
+			Speed = _rng.NextFloat(30) + 50;
 			TimeToLive = _maxTimeToLive;
 			_maxLength = (Target - Actor.LocalPosition).Length;
 		}
@@ -65,6 +65,16 @@ namespace LowQualityParticles
 			}
 		}
 
+		public Vector3 Target
+		{
+			get => _target;
+			set
+			{
+				_target = value;
+				_maxLength = (_target - Actor.LocalPosition).Length;
+			}
+		}
+
 		private void Update()
 		{
 			var t = TimeParam;
@@ -79,16 +89,20 @@ namespace LowQualityParticles
 			var actor = this.Actor;
 			if (TimeToLive <= 0)
 			{
-				if (ResetCallback != null)
+				if (ResetCallback != null && ResetCallback(this))
 				{
-					ResetCallback(Actor);
 					Reset();
 				}
 				else
 				{
-					Destroy(Actor);
+					Death();
 				}
 			}
+		}
+
+		public void Death()
+		{
+			Destroy(Actor);
 		}
 
 		private void FixedUpdate()
@@ -100,7 +114,21 @@ namespace LowQualityParticles
 			}
 			direction.Normalize();
 			Vector3 random = _rng.NextVector3() * RandomMotion;
-			this.Actor.LocalPosition += (direction * Speed + random) * Time.DeltaTime;
+			Vector3 postitionAdd = (direction * Speed * SpeedMultiplier * _maxLength / 60f + random) * Time.DeltaTime;
+
+			Vector3 finalPosition = Actor.LocalPosition + postitionAdd;
+
+			bool signChange =
+				Mathf.Sign(direction.X) != Mathf.Sign(Target.X - finalPosition.X) ||
+				Mathf.Sign(direction.Y) != Mathf.Sign(Target.Y - finalPosition.Y) ||
+				Mathf.Sign(direction.Z) != Mathf.Sign(Target.Z - finalPosition.Z);
+
+			if (signChange)
+			{
+				TimeToLive = 0;
+			}
+
+			this.Actor.LocalPosition = finalPosition;
 		}
 	}
 }

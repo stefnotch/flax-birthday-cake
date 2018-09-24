@@ -24,6 +24,12 @@ namespace NinaBirthday.ImplicitSurface
 			}
 		}
 
+		public Model Model
+		{
+			get;
+			set;
+		}
+
 		[NoSerialize]
 		public Vector3 BoundingBoxSize
 		{
@@ -73,14 +79,15 @@ namespace NinaBirthday.ImplicitSurface
 				Expression = _expressionString;
 			}
 
-			var model = Content.CreateVirtualAsset<Model>();
-			model.SetupLODs(1);
-			if (Material)
+			if (Model && !Model.IsVirtual)
 			{
-				model.SetupMaterialSlots(1);
+				Actor.Model = Model;
 			}
-			Actor.Model = model;
-			_mesh = model.LODs[0].Meshes[0];
+			else
+			{
+				CreateVirtualModel();
+			}
+
 			if (Material)
 			{
 				Actor.Entries[0].Material = Material;
@@ -103,7 +110,6 @@ namespace NinaBirthday.ImplicitSurface
 				}
 				else
 				{
-
 					Debug.Log("Fake Update");
 				}
 				_previousTime = Time.GameTime;
@@ -113,6 +119,18 @@ namespace NinaBirthday.ImplicitSurface
 		public void UpdateMesh()
 		{
 			ShouldUpdateMesh = true;
+		}
+
+		public void CreateVirtualModel()
+		{
+			Model = Content.CreateVirtualAsset<Model>();
+			Model.SetupLODs(1);
+			if (Material)
+			{
+				Model.SetupMaterialSlots(1);
+			}
+			Actor.Model = Model;
+			_mesh = Model.LODs[0].Meshes[0];
 		}
 
 		private void RecompileExpression(string expression)

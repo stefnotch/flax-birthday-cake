@@ -9,7 +9,7 @@ namespace NinaBirthday.SugarThingy
 	public class RandomColor : Script
 	{
 		public Material Material { get; set; }
-
+		private MaterialInstance _materialInstance;
 		public string ParamName { get; set; } = "Color";
 
 		private static readonly Random _rng = new Random();
@@ -18,8 +18,18 @@ namespace NinaBirthday.SugarThingy
 		{
 			if (Material)
 			{
-				Material.GetParam(ParamName).Value = new Color(_rng.NextFloat(), _rng.NextFloat(), _rng.NextFloat());
+				_materialInstance = Material.CreateVirtualInstance();
+				_materialInstance.GetParam(ParamName).Value = new Color(_rng.NextFloat(), _rng.NextFloat(), _rng.NextFloat());
+				if (Actor is ModelActor modelActor)
+				{
+					modelActor.Entries[0].Material = _materialInstance;
+				}
 			}
+		}
+
+		private void OnDestroy()
+		{
+			Destroy(ref _materialInstance);
 		}
 	}
 }

@@ -14,8 +14,10 @@ namespace NinaBirthday
 
 		[Serialize]
 		private Texture _texture;
+
 		[Serialize]
 		private Material _material;
+
 		private MaterialInstance _materialInstance;
 
 		[NoSerialize]
@@ -57,7 +59,6 @@ namespace NinaBirthday
 			}
 		}
 
-
 		[HideInEditor]
 		[NoSerialize]
 		public BoundingBox BoundingBox
@@ -93,7 +94,6 @@ namespace NinaBirthday
 			_mesh = model.LODs[0].Meshes[0];
 
 			MaterialChanged();
-
 
 			if (Texture)
 			{
@@ -139,7 +139,6 @@ namespace NinaBirthday
 			{
 				return -1;
 			}
-
 		}
 
 		private void Update()
@@ -147,7 +146,7 @@ namespace NinaBirthday
 			if (_mesh != null && ShouldUpdateMesh && Time.GameTime - _previousTime > MeshUpdateTime)
 			{
 				ShouldUpdateMesh = false;
-				Debug.Log("Up");
+				//Debug.Log("Up");
 				MetaSurface.Polygonize(BoundingBox);
 				var vertices = MetaSurface.Vertices;
 				var triangles = MetaSurface.Indices;

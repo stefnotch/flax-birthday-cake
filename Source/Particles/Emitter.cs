@@ -46,14 +46,22 @@ namespace LowQualityParticles
 				particleScript.ResetCallback = ResetParticle;
 				spawnedParticle.HideFlags = HideFlags.FullyHidden;
 
-				ResetParticle(spawnedParticle);
+				ResetParticle(particleScript);
 			}
 		}
 
-		private void ResetParticle(Actor particle)
+		private bool ResetParticle(Particle particle)
 		{
+			int spawnCount = ParticleCount - this.Actor.ChildrenCount;
+
+			if (spawnCount < 0)
+			{
+				return false;
+			}
+
 			Vector3 pos = _rng.NextVector3() * (_rng.NextFloat(2 * Radius) - Radius);
-			particle.LocalPosition = pos;
+			particle.Actor.LocalPosition = pos;
+			return true;
 		}
 	}
 }

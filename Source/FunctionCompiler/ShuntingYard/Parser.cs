@@ -79,6 +79,7 @@ namespace AST
 				case IToken<OperandTokenType> operand:
 					output.Push(token.ToASTNode());
 					break;
+
 				default:
 				{
 					throw new ParserException("Unknown token type");
@@ -108,7 +109,9 @@ namespace AST
 
 			topNode = output.Pop();
 			output.Clear();
+			output = null;
 			stack.Clear();
+			stack = null;
 			return topNode;
 		}
 
