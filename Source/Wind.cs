@@ -43,6 +43,14 @@ namespace NinaBirthday
 
 			if (_image != null)
 			{
+				if (Input.GetMouseButton(MouseButton.Left))
+				{
+					_image.Scale = new Vector2(1.25f);
+				}
+				else
+				{
+					_image.Scale = Vector2.One;
+				}
 				_image.X = Input.MousePosition.X - _image.Width / 2f;
 				_image.Y = Input.MousePosition.Y - _image.Height / 2f;
 				if (hasEmitter)
