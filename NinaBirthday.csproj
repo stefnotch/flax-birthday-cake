@@ -22,7 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>DEBUG;FLAX_ASSERTIONS;TRACE;FLAX_0;FLAX_0_2;FLAX_0_2_6168;FLAX_EDITOR;FLAX_WINDOWS;FLAX_EDITOR_WIN</DefineConstants>
+    <DefineConstants>DEBUG;FLAX_ASSERTIONS;TRACE;FLAX_0;FLAX_0_2;FLAX_0_2_6169;FLAX_EDITOR;FLAX_WINDOWS;FLAX_EDITOR_WIN</DefineConstants>
 	<UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -33,7 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>TRACE;FLAX_0;FLAX_0_2;FLAX_0_2_6168;FLAX_EDITOR;FLAX_WINDOWS;FLAX_EDITOR_WIN</DefineConstants>
+    <DefineConstants>TRACE;FLAX_0;FLAX_0_2;FLAX_0_2_6169;FLAX_EDITOR;FLAX_WINDOWS;FLAX_EDITOR_WIN</DefineConstants>
 	<UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
@@ -85,6 +85,9 @@
     <Compile Include="Source\ImplicitSurface\MetaSurf\MetaSurfaceCell.cs" />
     <Compile Include="Source\Particles\Emitter.cs" />
     <Compile Include="Source\Particles\Particle.cs" />
+    <Compile Include="Source\Skeleton\SkeletonToActors.cs" />
+    <Compile Include="Source\Skeleton\SyncBone.cs" />
+    <Compile Include="Source\SugarThingy\ImprovedRandomOrientation.cs" />
     <Compile Include="Source\SugarThingy\RandomColor.cs" />
     <Compile Include="Source\SugarThingy\RandomOrientation.cs" />
     <Compile Include="Cache\AssemblyInfo.cs" />

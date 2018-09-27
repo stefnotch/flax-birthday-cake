@@ -1,0 +1,97 @@
+{
+	"ID": "5ab04bfc482d94f345a18182478690bb",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6169,
+	"Data": [
+	{
+		"TypeID": 1,
+		"ID": "7f370cde414cd55851eaf8bcf4818785",
+		"ParentID": "00000000000000000000000000000000",
+		"Name": "d9963cb6-b5e1-4a11-8ff6-bbd1d2bd12af_Model",
+		"Transform": {
+			"Scale": {
+				"X": 2.0,
+				"Y": 2.0,
+				"Z": 2.0
+			}
+		},
+		"Model": "74903d614436068224b44db89c36ba8c",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "edd5894f48f45db22207489ff68b4ae8"
+				}
+			]
+		}
+	},
+	{
+		"TypeID": "NinaBirthday.SugarThingy.ImprovedRandomOrientation",
+		"ID": "dbb12fc1437c7be880c981a8f160aaaa",
+		"ParentID": "7f370cde414cd55851eaf8bcf4818785",
+		"V": {
+	"AngleFrom": {
+		"X": -15.0,
+		"Y": 0.0,
+		"Z": 0.0
+	},
+	"AngleTo": {
+		"X": 15.0,
+		"Y": 0.0,
+		"Z": 15.0
+	}
+}
+	},
+	{
+		"TypeID": 1,
+		"ID": "b97916914dc481e4aa249cb0c78fadf1",
+		"ParentID": "7f370cde414cd55851eaf8bcf4818785",
+		"Name": "Sphere",
+		"Transform": {
+			"Translation": {
+				"X": 0.0,
+				"Y": -1.6317272186279297,
+				"Z": 0.0
+			},
+			"Scale": {
+				"X": 0.09000000357627869,
+				"Y": 0.029999999329447748,
+				"Z": 0.09000000357627869
+			}
+		},
+		"Model": "dd86c4724bf734c4959d23b3c74faa05",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "d78628204f186e53dc8ef0b1d937a068"
+				}
+			]
+		}
+	},
+	{
+		"TypeID": 1,
+		"ID": "496e50284f51d0d97b06b69e4a198a9c",
+		"ParentID": "7f370cde414cd55851eaf8bcf4818785",
+		"Name": "Sphere 0",
+		"Transform": {
+			"Translation": {
+				"X": 0.0,
+				"Y": -0.7318501472473145,
+				"Z": 0.0
+			},
+			"Scale": {
+				"X": 0.07999999821186066,
+				"Y": 0.03500000014901161,
+				"Z": 0.07999999821186066
+			}
+		},
+		"Model": "dd86c4724bf734c4959d23b3c74faa05",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "d78628204f186e53dc8ef0b1d937a068"
+				}
+			]
+		}
+	}
+]
+}

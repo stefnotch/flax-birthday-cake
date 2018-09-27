@@ -67,24 +67,23 @@ namespace NinaBirthday.ImplicitSurface
 
 		private void Start()
 		{
-			_runtimeASTCompiler = new RuntimeASTCompiler();
-
-			if (_expressionString == null)
-			{
-				MetaSurface.Evaluate = (x, y, z) =>
-				   Mathf.Pow(Mathf.Sqrt(x * x + z * z) - 9, 2) + 1 * Mathf.Pow(y + Mathf.Sin(7f * Mathf.Atan2(z, x)), 2) - 5f;
-			}
-			else
-			{
-				Expression = _expressionString;
-			}
-
 			if (Model && !Model.IsVirtual)
 			{
 				Actor.Model = Model;
 			}
 			else
 			{
+				_runtimeASTCompiler = new RuntimeASTCompiler();
+
+				if (_expressionString == null)
+				{
+					MetaSurface.Evaluate = (x, y, z) =>
+					   Mathf.Pow(Mathf.Sqrt(x * x + z * z) - 9, 2) + 1 * Mathf.Pow(y + Mathf.Sin(7f * Mathf.Atan2(z, x)), 2) - 5f;
+				}
+				else
+				{
+					Expression = _expressionString;
+				}
 				CreateVirtualModel();
 			}
 

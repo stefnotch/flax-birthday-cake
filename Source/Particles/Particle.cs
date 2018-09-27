@@ -26,6 +26,7 @@ namespace LowQualityParticles
 		private void OnEnable()
 		{
 			ModelActor modelActor = Actor as ModelActor ?? Actor.GetChild<ModelActor>();
+			modelActor.Model.WaitForLoaded();
 			ReplaceWithMaterialInstance(modelActor.Entries[0]);
 
 			_maxTimeToLive = TimeToLive;

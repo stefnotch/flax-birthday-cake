@@ -1,0 +1,138 @@
+{
+	"ID": "03e7786745d96de58fbd32b20f4d90d5",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6169,
+	"Data": [
+	{
+		"TypeID": 3,
+		"ID": "d1c4d1b047799d069fe7349e302d2411",
+		"ParentID": "00000000000000000000000000000000",
+		"Name": "Root"
+	},
+	{
+		"TypeID": 1,
+		"ID": "a93a68bb4c77af3bbf173eb85a503b9d",
+		"ParentID": "d1c4d1b047799d069fe7349e302d2411",
+		"Name": "Cube",
+		"Transform": {
+			"Scale": {
+				"X": 1.0,
+				"Y": 0.10000000149011612,
+				"Z": 1.0
+			}
+		},
+		"Model": "b43f0f8f4aaba3f3156896a5a22ba493",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "1df990644fdb56028ec0d4b5500ee930"
+				}
+			]
+		}
+	},
+	{
+		"TypeID": 1,
+		"ID": "fb125206492e27129dcba08ae197e5f0",
+		"ParentID": "d1c4d1b047799d069fe7349e302d2411",
+		"Name": "Leg4",
+		"Transform": {
+			"Translation": {
+				"X": -40.0,
+				"Y": -30.0,
+				"Z": -40.0
+			},
+			"Scale": {
+				"X": 0.10000000149011612,
+				"Y": 0.6000000238418579,
+				"Z": 0.10000000149011612
+			}
+		},
+		"Model": "b43f0f8f4aaba3f3156896a5a22ba493",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "1df990644fdb56028ec0d4b5500ee930"
+				}
+			]
+		}
+	},
+	{
+		"TypeID": 1,
+		"ID": "6730fa064ac9086c28915aa36f5c8ed5",
+		"ParentID": "d1c4d1b047799d069fe7349e302d2411",
+		"Name": "Leg2",
+		"Transform": {
+			"Translation": {
+				"X": 40.0,
+				"Y": -30.0,
+				"Z": -40.0
+			},
+			"Scale": {
+				"X": 0.10000000149011612,
+				"Y": 0.6000000238418579,
+				"Z": 0.10000000149011612
+			}
+		},
+		"Model": "b43f0f8f4aaba3f3156896a5a22ba493",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "1df990644fdb56028ec0d4b5500ee930"
+				}
+			]
+		}
+	},
+	{
+		"TypeID": 1,
+		"ID": "b987c4d4470f010852d2f3b3ae517cf4",
+		"ParentID": "d1c4d1b047799d069fe7349e302d2411",
+		"Name": "Leg1",
+		"Transform": {
+			"Translation": {
+				"X": 40.0,
+				"Y": -30.0,
+				"Z": 40.0
+			},
+			"Scale": {
+				"X": 0.10000000149011612,
+				"Y": 0.6000000238418579,
+				"Z": 0.10000000149011612
+			}
+		},
+		"Model": "b43f0f8f4aaba3f3156896a5a22ba493",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "1df990644fdb56028ec0d4b5500ee930"
+				}
+			]
+		}
+	},
+	{
+		"TypeID": 1,
+		"ID": "2997545c48a0967e72c27aaaa4337ef5",
+		"ParentID": "d1c4d1b047799d069fe7349e302d2411",
+		"Name": "Leg3",
+		"Transform": {
+			"Translation": {
+				"X": -40.0,
+				"Y": -30.0,
+				"Z": 40.0
+			},
+			"Scale": {
+				"X": 0.10000000149011612,
+				"Y": 0.6000000238418579,
+				"Z": 0.10000000149011612
+			}
+		},
+		"Model": "b43f0f8f4aaba3f3156896a5a22ba493",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "1df990644fdb56028ec0d4b5500ee930"
+				}
+			]
+		}
+	}
+]
+}
