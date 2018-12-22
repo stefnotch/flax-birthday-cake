@@ -25,7 +25,7 @@ namespace LowQualityParticles
 
 		private void OnEnable()
 		{
-			ModelActor modelActor = Actor as ModelActor ?? Actor.GetChild<ModelActor>();
+			StaticModel modelActor = Actor as StaticModel ?? Actor.GetChild<StaticModel>();
 			modelActor.Model.WaitForLoaded();
 			ReplaceWithMaterialInstance(modelActor.Entries[0]);
 
@@ -57,7 +57,7 @@ namespace LowQualityParticles
 		{
 			get
 			{
-				ModelActor modelActor = Actor as ModelActor ?? Actor.GetChild<ModelActor>();
+				StaticModel modelActor = Actor as StaticModel ?? Actor.GetChild<StaticModel>();
 				if (modelActor)
 				{
 					return modelActor.Entries[0].Material?.GetParam("Time");

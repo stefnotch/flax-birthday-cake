@@ -8,7 +8,7 @@ using NinaBirthday.Source;
 namespace NinaBirthday
 {
 	[ExecuteInEditMode]
-	public class ImplicitChocolate : ScriptT<ModelActor>
+	public class ImplicitChocolate : ScriptT<StaticModel>
 	{
 		private TextureToSDF.SDFGrid _sdf;
 

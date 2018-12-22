@@ -9,11 +9,12 @@ using FlaxEngine.Rendering;
 namespace NinaBirthday.Source
 {
 	[ExecuteInEditMode]
-	public class Class1 : ScriptT<ModelActor>
+	public class Class1 : ScriptT<StaticModel>
 	{
 		private Texture _texture;
 		private Material _material;
 		private MaterialInstance _materialInstance;
+
 		public Material Material
 		{
 			get => _material;
@@ -23,6 +24,7 @@ namespace NinaBirthday.Source
 				MaterialChanged(_material);
 			}
 		}
+
 		public Texture Texture
 		{
 			get => _texture;
@@ -47,7 +49,6 @@ namespace NinaBirthday.Source
 
 			Texture = _texture;
 		}
-
 
 		private void MaterialChanged(Material material)
 		{

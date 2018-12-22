@@ -20,7 +20,7 @@ namespace NinaBirthday.SugarThingy
 			{
 				_materialInstance = Material.CreateVirtualInstance();
 				_materialInstance.GetParam(ParamName).Value = new Color(_rng.NextFloat(), _rng.NextFloat(), _rng.NextFloat());
-				if (Actor is ModelActor modelActor)
+				if (Actor is StaticModel modelActor)
 				{
 					modelActor.Entries[0].Material = _materialInstance;
 				}

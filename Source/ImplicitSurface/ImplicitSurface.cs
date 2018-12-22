@@ -10,7 +10,7 @@ using NinaBirthday.MetaSurf;
 namespace NinaBirthday.ImplicitSurface
 {
 	[ExecuteInEditMode]
-	public class ImplicitSurface : ScriptT<ModelActor>
+	public class ImplicitSurface : ScriptT<StaticModel>
 	{
 		public MaterialBase Material { get; set; }
 
